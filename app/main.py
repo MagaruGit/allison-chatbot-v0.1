@@ -414,10 +414,22 @@ st.markdown("""
             a[href*="streamlit.io"],
             a[href*="github.com"],
             iframe[title="streamlit"],
-            .styles_viewerBadge__CvC9N {
+            .styles_viewerBadge__CvC9N,
+            /* Botones flotantes de Streamlit Cloud */
+            div[class*="viewerBadge"],
+            div[class*="StatusWidget"],
+            button[kind="header"],
+            [data-testid="stStatusWidget"],
+            .stActionButton,
+            /* Forzar ocultar todo en la esquina inferior derecha */
+            div[style*="position: fixed"][style*="bottom"],
+            div[style*="position: fixed"][style*="right"] {
                 display: none !important;
                 visibility: hidden !important;
                 opacity: 0 !important;
+                pointer-events: none !important;
+                width: 0 !important;
+                height: 0 !important;
             }
         }
     </style>
