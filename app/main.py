@@ -4,10 +4,6 @@ import os
 import time
 import random
 from rag import get_qa_chain, create_vector_db, buscar_capa_gis, buscar_datos_vias
-from mic_component import * # Importar componente de micrófono (aunque es un script, lo ejecutaremos como módulo o copiaremos el código)
-
-# Mejor: Leer el archivo mic_component.py y ejecutarlo al final, o simplemente incluirlo aquí.
-# Para mantenerlo limpio, lo leeré y ejecutaré su contenido al final del script principal.
 
 
 # Inicializar historial de chat al principio para controlar la UI
