@@ -2,42 +2,54 @@ import zipfile
 import os
 import datetime
 
-if not os.path.exists('versiones_zip'):
-    os.makedirs('versiones_zip')
+# Configuración
+BACKUP_DIR = 'versiones_zip'
+EXCLUDE_DIRS = {BACKUP_DIR, '__pycache__', '.git', '.vscode', 'venv', 'env', '.idea', 'data_vias_limpia'} # Excluyo data_vias_limpia si es muy pesado, pero el usuario dijo "todo". Lo dejaré si no es gigante. Mejor lo incluyo.
+# Re-pensando: data_vias_limpia parece contener CSVs procesados. Mejor incluirlos para tener un backup completo.
+EXCLUDE_DIRS = {BACKUP_DIR, '__pycache__', '.git', '.vscode', 'venv', 'env', '.idea'}
+EXCLUDE_FILES = {'.DS_Store', 'Thumbs.db'}
+EXCLUDE_EXTENSIONS = {'.pyc', '.pyo', '.pyd'}
 
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-zip_name = f"versiones_zip/backup_{timestamp}.zip"
+def create_backup():
+    if not os.path.exists(BACKUP_DIR):
+        os.makedirs(BACKUP_DIR)
 
-folders_to_zip = ['app', 'assets', 'data', 'chroma_db']
-files_to_zip = ['README.md', 'requirements.txt', 'run.bat']
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    zip_name = os.path.join(BACKUP_DIR, f"backup_completo_{timestamp}.zip")
 
-print(f"Creating backup: {zip_name}...")
+    print(f"Iniciando respaldo en: {zip_name}...")
 
-try:
-    with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for folder in folders_to_zip:
-            if os.path.exists(folder):
-                for root, dirs, files in os.walk(folder):
-                    # Exclude __pycache__
-                    if '__pycache__' in dirs:
-                        dirs.remove('__pycache__')
+    try:
+        with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            for root, dirs, files in os.walk('.'):
+                # Modificar dirs in-place para saltar directorios excluidos
+                dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
+                
+                for file in files:
+                    if file in EXCLUDE_FILES:
+                        continue
                     
-                    for file in files:
-                        if file.startswith('~$'):
-                            continue
-                        file_path = os.path.join(root, file)
-                        # Avoid zipping the zip file itself if it somehow ends up in the path (unlikely with this logic)
-                        zipf.write(file_path, file_path)
-            else:
-                print(f"Warning: Folder '{folder}' not found.")
-        
-        for file in files_to_zip:
-            if os.path.exists(file):
-                zipf.write(file, file)
-            else:
-                print(f"Warning: File '{file}' not found.")
+                    _, ext = os.path.splitext(file)
+                    if ext in EXCLUDE_EXTENSIONS:
+                        continue
+                        
+                    # No incluir el propio zip que se está creando
+                    if file == os.path.basename(zip_name):
+                        continue
 
-    print(f"Backup created successfully: {zip_name}")
+                    file_path = os.path.join(root, file)
+                    # Guardar en el zip con la ruta relativa
+                    arcname = os.path.relpath(file_path, '.')
+                    
+                    # print(f"Agregando: {arcname}") # Comentado para no saturar la terminal
+                    zipf.write(file_path, arcname)
 
-except Exception as e:
-    print(f"Error creating backup: {e}")
+        print(f"Backup creado exitosamente: {zip_name}")
+        return zip_name
+
+    except Exception as e:
+        print(f"Error creando el respaldo: {e}")
+        return None
+
+if __name__ == "__main__":
+    create_backup()

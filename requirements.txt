@@ -4,4 +4,5 @@ langchain==0.3.13
 langchain-community==0.3.13
 langchain-openai
 langchain-text-splitters
-pandas
+p a n d a s 
+ 

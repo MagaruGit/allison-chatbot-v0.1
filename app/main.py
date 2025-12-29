@@ -1027,43 +1027,52 @@ if prompt:
         # Guardar en historial
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-# --- INYECTAR COMPONENTE DE MICRÓFONO AL FINAL ---
-# El botón se inyecta directamente en el documento padre vía JavaScript
+# --- INYECTAR BOTONES DE MICRÓFONO Y ENVIAR (SOLO MÓVIL) ---
+# Los botones se inyectan directamente en el documento padre vía JavaScript
 components.html("""
 <script>
 (function() {
-    // Verificar si ya existe el botón para no duplicarlo
-    if (window.parent.document.getElementById('mic-btn-allison')) {
+    // Verificar si ya existe el contenedor para no duplicarlo
+    if (window.parent.document.getElementById('allison-action-buttons')) {
         return;
     }
     
     // Crear estilos en el documento padre
     var style = window.parent.document.createElement('style');
     style.textContent = `
-        #mic-btn-allison {
+        #allison-action-buttons {
             position: fixed;
-            bottom: 85px;
-            right: 20px;
-            width: 55px;
-            height: 55px;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 999999;
+        }
+        
+        .allison-action-btn {
+            width: 50px;
+            height: 50px;
             background-color: rgb(3, 110, 58);
             border-radius: 50%;
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             cursor: pointer;
-            z-index: 999999;
             transition: transform 0.2s, background-color 0.2s;
             border: 2px solid white;
         }
         
-        #mic-btn-allison:active {
+        .allison-action-btn:active {
             transform: scale(0.95);
             background-color: rgb(2, 80, 42);
         }
         
-        #mic-btn-allison.listening {
+        .allison-action-btn.listening {
             background-color: #cc0000 !important;
             animation: mic-pulse 1.5s infinite;
         }
@@ -1074,35 +1083,61 @@ components.html("""
             100% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0); }
         }
         
-        #mic-btn-allison svg {
-            width: 28px;
-            height: 28px;
+        .allison-action-btn svg {
+            width: 24px;
+            height: 24px;
             fill: white;
         }
         
         /* Mostrar solo en móvil */
         @media only screen and (max-width: 768px) {
-            #mic-btn-allison {
+            #allison-action-buttons {
                 display: flex !important;
+            }
+            
+            /* Ajustar posición del input para dejar espacio a los botones */
+            [data-testid="stChatInput"] {
+                bottom: 75px !important;
             }
         }
     `;
     window.parent.document.head.appendChild(style);
     
-    // Crear el botón
-    var btn = window.parent.document.createElement('div');
-    btn.id = 'mic-btn-allison';
-    btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
+    // Crear contenedor de botones
+    var container = window.parent.document.createElement('div');
+    container.id = 'allison-action-buttons';
     
-    // Variables para reconocimiento
+    // Crear botón de micrófono
+    var micBtn = window.parent.document.createElement('div');
+    micBtn.className = 'allison-action-btn';
+    micBtn.id = 'mic-btn-allison';
+    micBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
+    
+    // Crear botón de enviar
+    var sendBtn = window.parent.document.createElement('div');
+    sendBtn.className = 'allison-action-btn';
+    sendBtn.id = 'send-btn-allison';
+    sendBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
+    
+    // Variables para reconocimiento de voz
     var recognition = null;
     var isListening = false;
     
-    btn.onclick = function() {
+    // Evento click del micrófono
+    micBtn.onclick = function() {
         if (isListening) {
             stopDictation();
         } else {
             startDictation();
+        }
+    };
+    
+    // Evento click del botón enviar
+    sendBtn.onclick = function() {
+        // Buscar el botón de enviar de Streamlit y hacer click
+        var submitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
+        if (submitBtn) {
+            submitBtn.click();
         }
     };
     
@@ -1116,7 +1151,7 @@ components.html("""
             
             recognition.onstart = function() {
                 isListening = true;
-                btn.classList.add('listening');
+                micBtn.classList.add('listening');
             };
             
             recognition.onerror = function(e) {
@@ -1142,7 +1177,7 @@ components.html("""
     
     function stopDictation() {
         isListening = false;
-        btn.classList.remove('listening');
+        micBtn.classList.remove('listening');
         if (recognition) {
             try { recognition.stop(); } catch(e) {}
         }
@@ -1152,7 +1187,6 @@ components.html("""
         var textareas = window.parent.document.querySelectorAll('textarea');
         for (var i = 0; i < textareas.length; i++) {
             var ta = textareas[i];
-            // Buscar el textarea del chat input
             if (ta.placeholder === '' || ta.getAttribute('data-testid') === 'stChatInputTextArea') {
                 var nativeSetter = Object.getOwnPropertyDescriptor(window.parent.HTMLTextAreaElement.prototype, "value").set;
                 nativeSetter.call(ta, text);
@@ -1163,8 +1197,12 @@ components.html("""
         }
     }
     
-    // Agregar al body del padre
-    window.parent.document.body.appendChild(btn);
+    // Agregar botones al contenedor
+    container.appendChild(micBtn);
+    container.appendChild(sendBtn);
+    
+    // Agregar contenedor al body del padre
+    window.parent.document.body.appendChild(container);
 })();
 </script>
 """, height=0, width=0)
