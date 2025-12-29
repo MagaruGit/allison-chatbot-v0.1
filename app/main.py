@@ -392,12 +392,10 @@ st.markdown("""
                 font-size: 0.9rem !important;
             }
             
-            /* Input de chat (Solo ancho, no posición para no romper estados) */
+            /* Input de chat en móvil - Solo ajustar ancho, la posición la maneja cada estado */
             [data-testid="stChatInput"] {
                 width: 92% !important;
                 max-width: 100% !important;
-                left: 50% !important;
-                transform: translate(-50%, -50%) !important; /* Mantener centrado */
             }
             
             /* Ajustar padding del contenedor principal */
@@ -634,6 +632,19 @@ else:
         [data-testid="stChatInput"] textarea {
             font-size: 1.1rem !important;
         }
+        
+        /* Ajuste móvil para el input en modo chat activo */
+        @media only screen and (max-width: 600px) {
+            [data-testid="stChatInput"] {
+                bottom: 15px !important;
+                width: 92% !important;
+                max-width: 100% !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+                margin: 0 !important;
+            }
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -833,6 +844,19 @@ if prompt:
         }
         [data-testid="stChatInput"] textarea {
             font-size: 1.1rem !important;
+        }
+        
+        /* Ajuste móvil después de enviar mensaje */
+        @media only screen and (max-width: 600px) {
+            [data-testid="stChatInput"] {
+                bottom: 15px !important;
+                width: 92% !important;
+                max-width: 100% !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+                margin: 0 !important;
+            }
         }
     </style>
     """, unsafe_allow_html=True)
