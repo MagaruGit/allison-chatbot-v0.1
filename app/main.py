@@ -404,6 +404,21 @@ st.markdown("""
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
             }
+            
+            /* Ocultar logo de Streamlit y botón de GitHub en móvil */
+            .viewerBadge_container__r5I1v,
+            .viewerBadge_link__qRIco,
+            [data-testid="stDecoration"],
+            .stDeployButton,
+            [data-testid="manage-app-button"],
+            a[href*="streamlit.io"],
+            a[href*="github.com"],
+            iframe[title="streamlit"],
+            .styles_viewerBadge__CvC9N {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
         }
     </style>
 """, unsafe_allow_html=True)
