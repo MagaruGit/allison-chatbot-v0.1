@@ -4,6 +4,11 @@ import os
 import time
 import random
 from rag import get_qa_chain, create_vector_db, buscar_capa_gis, buscar_datos_vias
+from mic_component import * # Importar componente de micrófono (aunque es un script, lo ejecutaremos como módulo o copiaremos el código)
+
+# Mejor: Leer el archivo mic_component.py y ejecutarlo al final, o simplemente incluirlo aquí.
+# Para mantenerlo limpio, lo leeré y ejecutaré su contenido al final del script principal.
+
 
 # Inicializar historial de chat al principio para controlar la UI
 if "messages" not in st.session_state:
@@ -449,6 +454,15 @@ if len(st.session_state.messages) == 0:
                 opacity: 0;
                 display: inline-block;
             }
+            
+            /* Ajuste para móviles: Subir el mensaje para que no tape el input */
+            @media only screen and (max-width: 600px) {
+                #welcome-message {
+                    top: 55% !important; /* Subir del 65% al 55% */
+                    font-size: 1.2rem !important; /* Reducir un poco la fuente */
+                    width: 90% !important;
+                }
+            }
         </style>
         """, unsafe_allow_html=True)
 
@@ -529,6 +543,15 @@ if len(st.session_state.messages) == 0:
             padding: 0 !important;
             animation: floatIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
+        
+        /* Ajuste móvil para el input inicial */
+        @media only screen and (max-width: 600px) {
+            [data-testid="stChatInput"] {
+                top: 75% !important; /* Bajar un poco más el input en móvil */
+                width: 90% !important;
+            }
+        }
+        
         [data-testid="stChatInput"] > div {
             background-color: #FFFFFF !important;
             border: 2px solid rgb(3, 110, 58) !important;
@@ -952,6 +975,160 @@ if prompt:
         st.session_state.is_generating = False
         
         # Mostrar respuesta final limpia (sin cursor)
+        message_placeholder.markdown(f"<div class='bot-message-content'>{full_response}</div>", unsafe_allow_html=True)
+
+# --- INYECTAR COMPONENTE DE MICRÓFONO AL FINAL ---
+# Leemos el archivo mic_component.py y renderizamos su contenido HTML/JS
+# Esto asegura que el botón esté disponible en la página
+try:
+    with open("app/mic_component.py", "r", encoding="utf-8") as f:
+        # Saltamos las líneas de importación o comentarios de python si los hubiera, 
+        # pero como lo creamos como puro string dentro de components.html, 
+        # necesitamos extraer el contenido del string.
+        # Sin embargo, la forma más fácil es simplemente ejecutar el archivo si es código python válido
+        # O mejor aún, copiar el contenido del components.html aquí directamente.
+        pass
+except:
+    pass
+
+# Para simplificar, inyectamos el componente directamente aquí al final
+components.html("""
+<style>
+    /* Estilo del botón flotante */
+    #mic-btn {
+        position: fixed;
+        bottom: 80px; /* Encima del input si está abajo, o flotando si está arriba */
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: rgb(3, 110, 58);
+        border-radius: 50%;
+        display: none; /* Oculto por defecto, se muestra solo en móvil */
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        cursor: pointer;
+        z-index: 999999;
+        transition: transform 0.2s, background-color 0.2s;
+        border: 2px solid white;
+    }
+    
+    #mic-btn:active {
+        transform: scale(0.95);
+        background-color: rgb(2, 80, 42);
+    }
+    
+    #mic-btn.listening {
+        background-color: #cc0000;
+        animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.7); }
+        70% { box-shadow: 0 0 0 15px rgba(204, 0, 0, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0); }
+    }
+    
+    /* Icono de micrófono (SVG simple) */
+    #mic-icon {
+        width: 30px;
+        height: 30px;
+        fill: white;
+    }
+    
+    /* Mostrar solo en pantallas pequeñas (móvil) */
+    @media only screen and (max-width: 768px) {
+        #mic-btn {
+            display: flex;
+        }
+    }
+</style>
+
+<div id="mic-btn" onclick="toggleDictation()">
+    <svg id="mic-icon" viewBox="0 0 24 24">
+        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+    </svg>
+</div>
+
+<script>
+    var recognition;
+    var isListening = false;
+    
+    function toggleDictation() {
+        if (isListening) {
+            stopDictation();
+        } else {
+            startDictation();
+        }
+    }
+
+    function startDictation() {
+        if (window.hasOwnProperty('webkitSpeechRecognition')) {
+            recognition = new webkitSpeechRecognition();
+            
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = "es-ES"; // Español
+            
+            recognition.onstart = function() {
+                isListening = true;
+                document.getElementById('mic-btn').classList.add('listening');
+            };
+            
+            recognition.onerror = function(e) {
+                console.error(e);
+                stopDictation();
+            };
+            
+            recognition.onend = function() {
+                stopDictation();
+            };
+            
+            recognition.onresult = function(e) {
+                var transcript = e.results[0][0].transcript;
+                insertTextToStreamlit(transcript);
+                stopDictation();
+            };
+            
+            recognition.start();
+        } else {
+            alert("Tu navegador no soporta reconocimiento de voz. Intenta usar Chrome en Android.");
+        }
+    }
+    
+    function stopDictation() {
+        isListening = false;
+        document.getElementById('mic-btn').classList.remove('listening');
+        if (recognition) {
+            recognition.stop();
+        }
+    }
+    
+    function insertTextToStreamlit(text) {
+        // Buscar el textarea de Streamlit dentro del iframe padre
+        var textareas = window.parent.document.getElementsByTagName('textarea');
+        for (var i = 0; i < textareas.length; i++) {
+            var ta = textareas[i];
+            if (ta.getAttribute('data-testid') === 'stChatInputTextArea' || 
+                ta.getAttribute('aria-label') === 'Chat input') {
+                
+                // Establecer el valor
+                // React necesita que se dispare un evento de input real para actualizar su estado
+                var nativeTextAreaValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
+                nativeTextAreaValueSetter.call(ta, text);
+                
+                var event = new Event('input', { bubbles: true});
+                ta.dispatchEvent(event);
+                
+                // Opcional: Hacer foco
+                ta.focus();
+                break;
+            }
+        }
+    }
+</script>
+""", height=0, width=0)
         message_placeholder.markdown(f"""<div class="bot-message-content" style='background-color: rgb(3, 110, 58); color: #FFFFFF; font-family: "Expressway", sans-serif; padding: 15px; border-radius: 15px; border: 1px solid rgb(3, 110, 58); box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>{full_response}</div>""", unsafe_allow_html=True)
         
         # Guardar en historial
