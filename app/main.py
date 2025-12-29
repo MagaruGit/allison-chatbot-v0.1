@@ -1134,12 +1134,37 @@ components.html("""
     
     // Evento click del botón enviar
     sendBtn.onclick = function() {
+        // Cerrar el teclado quitando el foco del textarea
+        var textareas = window.parent.document.querySelectorAll('textarea');
+        textareas.forEach(function(ta) {
+            ta.blur();
+        });
+        
         // Buscar el botón de enviar de Streamlit y hacer click
         var submitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
         if (submitBtn) {
             submitBtn.click();
         }
+        
+        // Asegurar que el foco se quite después del click
+        setTimeout(function() {
+            window.parent.document.activeElement.blur();
+        }, 100);
     };
+    
+    // Observar cuando Streamlit envía un mensaje para cerrar el teclado
+    var originalSubmitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
+    if (originalSubmitBtn) {
+        originalSubmitBtn.addEventListener('click', function() {
+            setTimeout(function() {
+                var textareas = window.parent.document.querySelectorAll('textarea');
+                textareas.forEach(function(ta) {
+                    ta.blur();
+                });
+                window.parent.document.activeElement.blur();
+            }, 50);
+        });
+    }
     
     function startDictation() {
         var SpeechRecognition = window.parent.webkitSpeechRecognition || window.parent.SpeechRecognition;
