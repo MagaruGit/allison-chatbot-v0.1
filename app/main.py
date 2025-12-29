@@ -975,22 +975,12 @@ if prompt:
         st.session_state.is_generating = False
         
         # Mostrar respuesta final limpia (sin cursor)
-        message_placeholder.markdown(f"<div class='bot-message-content'>{full_response}</div>", unsafe_allow_html=True)
+        message_placeholder.markdown(f"""<div class="bot-message-content" style='background-color: rgb(3, 110, 58); color: #FFFFFF; font-family: "Expressway", sans-serif; padding: 15px; border-radius: 15px; border: 1px solid rgb(3, 110, 58); box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>{full_response}</div>""", unsafe_allow_html=True)
+        
+        # Guardar en historial
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 # --- INYECTAR COMPONENTE DE MICRÓFONO AL FINAL ---
-# Leemos el archivo mic_component.py y renderizamos su contenido HTML/JS
-# Esto asegura que el botón esté disponible en la página
-try:
-    with open("app/mic_component.py", "r", encoding="utf-8") as f:
-        # Saltamos las líneas de importación o comentarios de python si los hubiera, 
-        # pero como lo creamos como puro string dentro de components.html, 
-        # necesitamos extraer el contenido del string.
-        # Sin embargo, la forma más fácil es simplemente ejecutar el archivo si es código python válido
-        # O mejor aún, copiar el contenido del components.html aquí directamente.
-        pass
-except:
-    pass
-
 # Para simplificar, inyectamos el componente directamente aquí al final
 components.html("""
 <style>
@@ -1129,7 +1119,3 @@ components.html("""
     }
 </script>
 """, height=0, width=0)
-        message_placeholder.markdown(f"""<div class="bot-message-content" style='background-color: rgb(3, 110, 58); color: #FFFFFF; font-family: "Expressway", sans-serif; padding: 15px; border-radius: 15px; border: 1px solid rgb(3, 110, 58); box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>{full_response}</div>""", unsafe_allow_html=True)
-        
-        # Guardar en historial
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
