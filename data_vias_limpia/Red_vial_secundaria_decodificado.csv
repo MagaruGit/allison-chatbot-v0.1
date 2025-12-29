@@ -1,0 +1,170 @@
+﻿OBJECTID,TIPO_VIA,SUBREGION,MUNICIPIO,NOMBRE_VIA,CODIGO_VIA,COMPETENTE,ORDEN,CONCESION,TRAMO_VIA,RUTA_VIA,INICIO,FIN,CENTRO_POBLADO,L_ODOMETRO,L_GPS,ANCHO_VIA,TIPOSUPERFICIE,ESTADO_SUPERFICIE,FUENTEINFO,PRODUCTO_PRINCIPAL,Shape__Length,GlobalID
+1,2, , ,Paso por Caldas,25ANF, ,Primer Orden, , , ,Paso por Caldas,Paso por Caldas, ,10.4,10.5,7.0,0,0, , ,10510.528517178196,6c5fbe9d-5225-488e-ac93-656a1825f663
+2,2, , ,La Fabiana - El Líbano - Támesis,25AN01-1, ,Segundo Orden, , , ,La Fabiana, Támesis, ,17.0,16.4,6.78,0,0, , ,17040.04810783599,eed76332-8bd4-410b-b0db-8b754ba491b9
+3,2, , ,Támesis - Puente Lata,25AN01-2-1, ,Tercer Orden, , , ,Támesis, Puente Lata, ,21.0,20.5,3.5,0,0, , ,20503.246239431104,15bc3ccc-c5d0-443e-bb33-2a27cdae1019
+4,2, , ,Santa Bárbara (Ruta 25 ) - Ye a Fredonia - Fredonia,25AN02, ,Segundo Orden, , , ,Santa Bárbara (Ruta 25 ), Fredonia, ,27.0,25.9,3.583933,0,0, , ,26262.79806284498,49fc20d2-35c2-42f2-a77d-3f6b34be58bf
+5,2, , ,La Granja (Montebello) - El Retiro,25AN03-1, ,Segundo Orden, , , ,La Granja (Montebello), El Retiro, ,25.6,25.6,4.22944,0,0, , ,25519.26960496812,7f7aeb6a-8d1d-4c93-836f-9ee287886e80
+6,2, , ,Montebello - El Cairo,25AN03-2, ,Tercer Orden, , , ,Montebello, El Cairo, ,23.7,22.4,4.085791,0,0, , ,22455.68782481307,1a7ddaf1-cc0d-4dd4-bc59-03cba0921323
+7,2, , ,Caldas - Angelópolis,25AN05, ,Segundo Orden, , , ,Caldas, Angelópolis, ,14.2,13.8,6.0,0,0, , ,13859.329210738717,ffa4d808-ee9e-48cf-be16-759b794bb2f1
+8,2, , ,Variante Don Matías (Ruta 25) - Río Chico - Entrerríos,25AN06, ,Segundo Orden, , , ,Variante Don Matías (Ruta 25),Entrerríos., ,24.9,24.8,6.954706,0,0, , ,24647.755493612513,c9d2696c-63e8-473c-8f10-7f7b480bd0d3
+9,2, , ,La Cabaña (Ruta 25) - Puente Gavino.,25AN07, ,Tercer Orden, , , ,La Cabaña (Ruta 25),Puente Gavino., ,37.5,39.0,5.0,0,0, , ,38084.63438653425,5a03bd16-8243-411d-8142-85c166a21259
+10,2, , ,El Roble (Ruta 25) - La Ye (Partidas Angostura) - La Herradura,25AN09, ,Segundo Orden, , , ,El Roble (Ruta 25), La Herradura, ,38.8,37.5,6.199884,0,0, , ,37828.01857679509,9e0b4f62-9ec2-4d99-8df0-b914848c0f22
+11,2, , ,La Ese - Angostura - La Ye (Partidas Angostura),25AN09-1, ,Segundo Orden, , , ,La Ese,La Ye (Partidas Angostura), ,32.4,32.5,6.25,0,0, , ,32499.622827411236,c3c25777-0e6e-4fb0-b9c0-7be220741694
+12,2, , ,Yarumal - La Ese - Campamento,25AN12, ,Segundo Orden, , , ,Yarumal,Campamento., ,19.1,19.5,6.076923,0,0, , ,19542.936689195794,490e6d5f-bf5b-4430-8e88-1a6e0486873c
+13,2, , ,Campamento - Ye de Anorí,25AN12-1, ,Tercer Orden, , , ,Campamento, Ye de Anorí, ,37.0,36.9,3.11726,0,0, , ,36898.41983111728,cbffebf3-404c-4184-8b61-1a8a3735840a
+14,2, , ,Anorí - El Mango,25AN12-1-1, ,Segundo Orden, , , ,Anorí, El Mango, ,55.5,54.1,6.378378,0,0, , ,57090.45482288611,46a29e2d-d2d6-464d-9f25-54980784eeff
+15,2, , ,San Fermín (Ruta 25) - Briceño,25AN13, ,Segundo Orden, , , ,San Fermín (Ruta 25), Briceño, ,28.6,28.1,6.140351,0,0, , ,28377.264592524007,d546f6b3-e640-4785-b413-6ff2d2dd2545
+16,2, , ,Paso por Valdivia,25AN14, ,Segundo Orden, , , ,Paso por Valdivia,Paso por Valdivia, ,1.8,1.9,7.0,0,0, , ,1872.4377679582508,7514647e-af70-422c-8474-ed492d1abdd8
+17,2, , ,Paso por Cáceres,25AN15, ,Segundo Orden, , , ,Paso por Cáceres,Paso por Cáceres, ,3.4,3.3,6.22,0,0, , ,3284.0894979921513,e8615825-2f77-4e7b-b800-1d4a64f71448
+18,2, , ,Jardín (Ruta 25) - Manizales (Límites con Departamento de Córdoba).,25AN16, ,Tercer Orden, , , ,Jardín (Ruta 25),Manizales (Límites con Departamento de Córdoba)., ,20.9,20.9,5.0,0,0, , ,21983.828275945678,10b7c235-3055-4d01-ab59-a7026170c2cd
+19,2, , ,Partidas de Zaragoza - El Bagre,25AN17-1, ,Tercer Orden, , , ,Partidas de Zaragoza, El Bagre, ,18.5,18.6,4.717778,0,0, , ,18576.352619121903,6f2362d3-c7a7-4515-b7cc-9181a267d13b
+20,2, , ,Zaragoza (incluye variante Segovia) - La Cruzada - Belén - Remedios,25AN17-2, ,Segundo Orden, , , ,Zaragoza (incluye variante Segovia), Remedios, ,69.9,69.9,6.0,0,0, , ,69593.72165699859,e69f7b38-f225-4b6b-bd29-5702a4230cfb
+21,2, , ,Belén - El Chispero - La Cruzada,25AN17-2-1, ,Tercer Orden, , , ,Belén,La Cruzada, ,14.6,14.6,5.0,0,0, , ,14444.425968485644,b1c20487-065e-45b3-be43-1010726cbaa3
+22,2, , ,La Cruzada - Segovia,25AN17-2-2, ,Segundo Orden, , , ,La Cruzada, Segovia, ,3.0,3.0,6.333333,0,0, , ,3024.461088186796,dd707ca2-ef0a-47a5-adc8-6b158d2a4066
+23,2, , ,Campo Alegre (Ruta 25 - Caucasia) - Nechí,25AN18, ,Segundo Orden, , , ,Campo Alegre (Ruta 25 - Caucasia),Nechí., ,65.8,65.8,7.019375,0,0, , ,65824.78412326855,4af195c2-c13b-4810-8e24-cc6541db09b7
+24,2, , ,Puente Iglesias (Ruta 25B) - Fredonia,25BAN01, ,Segundo Orden, , , ,Puente Iglesias (Ruta 25B),Fredonia, ,23.3,22.9,7.659574,0,0, , ,22542.092028003804,9236116b-f9a3-4130-b619-2e21a7af9436
+25,2, , ,Jamaica (Ruta 25B) - Canaán - Jericó,25BAN02, ,Segundo Orden, , , ,Jamaica (Ruta 25B),Jericó, ,22.6,21.7,6.913043,0,0, , ,22382.932864197664,9773206c-2d95-4968-826c-2ffd44707413
+26,2, , ,Canaan - Tarso,25BAN02-1, ,Segundo Orden, , , ,Canaan, Tarso, ,6.4,6.4,7.307692,0,0, , ,6477.166956563298,bc689054-8f66-41a5-ada3-c691fbe0c596
+27,2, , ,Pueblorrico - La Bodega - Peñalisa (Ruta 25B),25BAN03, ,Tercer Orden, , , ,Pueblorrico,Peñalisa (Ruta 25B), ,27.0,26.1,4.415254,0,0, , ,26196.661963626626,842da42b-fd7c-4792-b1a8-647dcde89484
+28,2, , ,La Bodega - Tarso - Pueblorrico,25BAN03-1, ,Segundo Orden, , , ,La Bodega, Pueblorrico, ,22.1,21.4,6.192308,0,0, , ,22266.125329121733,8fb347f8-dfba-4be7-99e7-7f97eb06d3df
+29,2, , ,Pueblorrico - Jericó,25BAN03-2, ,Segundo Orden, , , ,Pueblorrico, Jericó, ,11.0,10.4,4.740702,0,0, , ,10503.376599253676,f93586d1-56de-4eb1-a34d-d5fb64cc64f8
+30,2, , ,Altamira - Betulia,25BAN04-1, ,Tercer Orden, , , ,Altamira, Betulia, ,33.3,31.7,5.62196,0,0, , ,31692.69796778443,d138b664-1aa3-4f35-b53b-099e6085d949
+31,2, , ,Betulia - Urrao,25BAN04-1-1, ,Segundo Orden, , , ,Betulia, Urrao, ,36.6,37.3,6.089189,0,0, , ,37326.450883604055,a73cde61-ab7c-4938-a650-0af9ea7357fb
+32,2, , ,Altamira - San José,25BAN04-2, ,Segundo Orden, , , ,Altamira, San José, ,30.1,29.9,3.0,0,0, , ,29955.46284437027,3cc7279e-2a4f-4504-9f76-121c21477919
+33,2, , ,Ramal a Anzá,25BAN05, ,Segundo Orden, , , ,Ramal a Anzá,Ramal a Anzá, ,1.7,1.5,6.0,0,0, , ,1499.9760708560786,e7c852f4-c557-4acc-9d62-9d276d29c69c
+34,2, , ,La Usa (Río Cauca) - Caicedo,25BAN06, ,Segundo Orden, , , ,La Usa (Río Cauca), Caicedo, ,37.7,38.9,5.0,0,0, , ,37791.6773228107,8901c6ec-fe2e-4b71-a855-b58cad0c77c2
+35,2, , ,Caicedo - Urrao,25BAN06-1, ,Segundo Orden, , , ,Caicedo, Urrao, ,31.9,31.5,3.539514,0,0, , ,31631.321589583924,ad5b4083-13c7-4e15-a63e-6e5a2706fe42
+36,2, , ,El Boton - Frontino,62AN08, ,Segundo Orden, , , ,El Boton, Frontino, ,47.56,47.45127223,7.0,0,0, , ,45542.593460702905,f562b958-f284-40cf-9e1b-eb0c42dd957b
+37,2, , ,Uramita - Peque,62AN09, ,Tercer Orden, , , ,Uramita, Peque, ,62.86,62.64908527,5.0,0,0, , ,63531.8174749299,863ceeb0-09de-46b7-a7bf-b8f0632690e1
+38,2, , ,Chorodó (Ruta 62) - Frontino,62AN10, ,Segundo Orden, , , ,Chorodó (Ruta 62), Frontino, ,10.1,9.99838879,7.0,0,0, , ,10043.666172868352,eee6f891-625f-4b84-853b-29346c5cb4e0
+39,2, , ,Frontino - La Balsa,62AN10-1, ,Tercer Orden, , , ,Frontino, La Balsa, ,0.0,0.0,4.334,0,0, , ,15518.411942695931,e5f8c782-4ad8-4c35-b772-300c63a5b83d
+40,2, , ,Buenos Aires (Ruta 62) - Abriaquí,62AN11, ,Tercer Orden, , , ,Buenos Aires (Ruta 62), Abriaquí, ,25.88,26.52117822,5.0,0,0, , ,25971.756147235392,acdcf0eb-62c4-4d62-9565-999b5cde0521
+41,2, , ,Manglar (Ruta 62) - Giraldo,62AN12, ,Tercer Orden, , , ,Manglar (Ruta 62), Giraldo, ,3.44,3.54393189,6.0,0,0, , ,3583.82606848411,383a332b-9e88-42a4-8f3b-f99cf106c829
+42,2, , ,Pinguro - Buriticá,62AN13, ,Tercer Orden, , , ,Pinguro, Buriticá, ,6.95,6.4810743,6.0,0,0, , ,6700.185100119582,5a8f8fac-8e6b-453e-8cd4-0c6cad4e951c
+43,2, , ,Puente de Occidente - Olaya - Liborina,62AN14, ,Segundo Orden, , , ,Puente de Occidente,Liborina, ,15.6,15.72248305,5.96875,0,0, , ,15722.71796405493,81f6eaf1-bb10-43da-8a4b-f90e114e4a76
+44,2, , ,Liborina - Partidas (San Jose De la Montaña),62AN14-1, ,Tercer Orden, , , ,Liborina, Partidas (San Jose De la Montaña), ,40.22,39.88863365,5.0,0,0, , ,39880.36539225844,a572bcc0-313e-4c69-9a86-63f19fc25380
+45,2, , ,Liborina - Sabanalarga,62AN14-2, ,Segundo Orden, , , ,Liborina, Sabanalarga, ,33.5,33.18066758,6.058824,0,0, , ,33311.48943439692,bf984d5d-70b9-4a6b-8d36-08f9bcb19c23
+46,2, , ,La Miserenga (Cruce Ruta 62) - Ebéjico - Heliconia - Alto del Chuscal,62AN17, ,Segundo Orden, , , ,La Miserenga (Cruce Ruta 62), Alto del Chuscal, ,69.0,68.5457444,4.944412,0,0, , ,68649.35383776783,316c5377-f8cf-46cb-8c35-a4c99eac6fbf
+47,2, , ,Alto del Chuscal - San Antonio de Prado,62AN17-1, ,Segundo Orden, , , ,Alto del Chuscal, San Antonio de Prado, ,8.0,8.2512768,5.9375,0,0, , ,8300.188030748543,989485b2-c906-4858-8706-547c3fa29667
+48,2, , ,Pajarito - San Pedro de Los Milagros - La Ye - Entrerríos - Santa Rosa de Osos (cruce ruta 25),62AN18, ,Primer Orden, , , ,Pajarito, Santa Rosa de Osos, ,61.76,61.40952427,7.154472,0,0, , ,63617.14732655771,3a33e95f-d2ca-4cf7-8d73-94b25c90370e
+49,2, , ,San Pedro de los Milagros - Río Chico,62AN18-1, ,Tercer Orden, , , ,San Pedro de los Milagros,Cruce Variante (Don Matías - Entrerríos), ,23.1,23.01713595,3.960939,0,0, , ,22651.787962968996,cae1765b-d79f-4c6d-be94-59809a61032d
+50,2, , ,La Ye - Belmira,62AN18-2, ,Segundo Orden, , , ,La Ye, Belmira, ,19.1,19.04740927,7.4125,0,0, , ,19006.679017380648,952b6ddd-3953-4709-a2ae-947f1fda902e
+51,2, , ,La Apartada (San José de La Montaña) - Partidas (San Jose de la Montaña) - Toledo - Matanzas,62AN18-3-1, ,Tercer Orden, , , ,La Apartada, Matanzas, ,51.0,48.54654755,3.24465,0,0, , ,48772.57236964249,020bfbd6-7455-43f6-bfd6-ed4e11237d33
+52,2, , ,Barbosa - Concepción,62AN19, ,Segundo Orden, , , ,Barbosa, Concepción, ,23.0,22.90096254,4.285742,0,0, , ,22603.979825604183,48d0574d-5041-4072-b24b-bb61c317045e
+53,2, , ,Concepción - Alejandría,62AN19-1, ,Tercer Orden, , , ,Concepción,Alejandría, ,17.0,16.41172528,3.36048,0,0, , ,16514.698180320578,8f5d56f5-02dd-495e-8494-e3f897cc1fe7
+54,2, , ,Concepción - San Vicente,62AN19-2, ,Tercer Orden, , , ,Concepción, San Vicente, ,23.08,22.98363136,4.130613,0,0, , ,22849.083259401188,68ccf083-35b9-416d-b0dc-1aad597128ff
+55,2, , ,Porcesito - Puente Gavino - La Cortada - Yolombó - Yalí - Playas - Vegachí,62AN21, ,Segundo Orden, , , ,Porcecito, Vegachí, ,77.93,77.94977086,7.288462,0,0, , ,78289.66872771365,9bc70be8-53ca-44c9-bd5e-1ec3cc6d870e
+56,2, , ,Puente Gavino - Gómez Plata - El Guayabo - Carolina del Príncipe - La Herradura - Partidas a Guadalupe - Guadalupe,62AN21-1, ,Segundo Orden, , , ,Puente Gavino,Guadalupe., ,54.3,53.61945709,7.118519,0,0, , ,53834.444909891805,7a81c70f-6fcf-4418-9be5-9627b19e7c1c
+57,2, , ,El Guayabo - El Salto - Partidas a Guadalupe,62AN21-1-2, ,Tercer Orden, , , ,El Guayabo (Gómez Plata), Partidas a Guadalupe, ,16.3,16.26901867,5.0,0,0, , ,16185.468442925494,9793dfe2-1f0e-4e13-a10f-ad39687ad205
+58,2, , ,La Ceja - El Retiro,56AN04, ,Segundo Orden, , , ,La Ceja, El Retiro, ,14.1,14.2,6.0,0,0, , ,14287.283237282176,6f367b20-6f54-4226-bba6-affd2410284b
+59,2, , ,La Ceja - Guaico Grande - Abejorral,56AN05, ,Segundo Orden, , , ,La Ceja,Abejorral, ,42.2,42.0,5.723457,0,0, , ,41950.478611029495,68229629-9c7e-49eb-b493-3bc3551aa6de
+60,2, , ,Sonsón - Puente San Rafael,56AN09, ,Segundo Orden, , , ,Sonsón, Puente San Rafael, ,19.4,19.1,4.108953,0,0, , ,19221.3299019681,98166232-83be-48fb-8474-ae283685fba1
+61,2, , ,Sonsón - La Quiebra - Nariño,56AN10, ,Segundo Orden, , , ,Sonsón,Nariño, ,33.4,32.4,6.584055,0,0, , ,32642.52955249656,7380caec-0c75-4b99-b605-ffd2d436fc35
+62,2, , ,La Quiebra - Argelia,56AN10-1, ,Segundo Orden, , , ,La Quiebra, Argelia, ,18.4,17.6,6.265123,0,0, , ,18092.330909126405,72d462b9-b1c0-4593-831b-077cd7f5f845
+63,2, , ,Nariño - Puente Linda,56AN10-2, ,Tercer Orden, , , ,Nariño, Puente Linda, ,20.5,20.6,4.550803,0,0, , ,20803.648220347703,9931330f-343a-4f60-9fc3-583e1cb75046
+64,2, , ,Santo Domingo Savio - Piedras Blancas - Autopista (Guarne),6004A, ,Tercer Orden, , , ,Santo Domingo Savio, Autopista (Guarne), ,16.2,0.0,3.6,0,0, , ,16513.336396540824,519da579-3ebc-41d4-85b6-422508db8279
+65,2, , ,Bolívar - El Chaquiro,60AN01, ,Segundo Orden, , , ,Bolívar, El Chaquiro, ,35.0,33.7,4.025803,0,0, , ,33891.62342254876,011fbd10-eb34-495f-b5ce-c6d0ce21f017
+66,2, , ,Puerto Boy - Betania,60AN02-1, ,Segundo Orden, , , ,Puerto Boy,Betania, ,13.5,13.5,7.0,0,0, , ,13682.326462230436,5622a508-06d6-4f1a-8513-7a2dbb550c13
+67,2, , ,Pueblorrico - Ye a La Bodega (Andes) - La Bodega (Andes),60AN04-1, ,Tercer Orden, , , ,Pueblorrico, La Bodega (Andes), ,28.0,26.8,4.196689,0,0, , ,27084.621896604178,12e55034-8df1-4212-a7af-3db1ea72451a
+68,2, , ,El Barroso - El Chaquiro - Salgar,60AN05, ,Segundo Orden, , , ,El Barroso,Salgar, ,13.9,12.9,5.977778,0,0, , ,13427.200710288425,e555e224-6ec4-48dc-8d3f-df8f0e17443a
+69,2, , ,Salgar - La Quiebra,60AN05-1, ,Tercer Orden, , , ,Salgar,La Quiebra, ,18.8,18.7,4.409854,0,0, , ,18914.092729329408,c92a6147-2a2b-4537-b330-766ef6813350
+70,2, , ,Concordia - El Socorro - Betulia,60AN06-2, ,Tercer Orden, , , ,Concordia, Betulia, ,53.7,53.0,3.360687,0,0, , ,53006.948330280306,a1df38bf-2013-4c5d-92e9-58ddc8f39cc1
+71,2, , ,Bolombolo - Venecia,60AN07, ,Segundo Orden, , , ,Bolombolo, Venecia, ,18.3,18.0,7.930233,0,0, , ,18081.251367934503,345d7c43-ad3e-463f-be29-33a4dfc6d16a
+72,2, , ,Albania - Titiribí,60AN08, ,Segundo Orden, , , ,Albania,Titiribí., ,9.6,9.5,6.973684,0,0, , ,9540.503871248751,a5576be4-16e2-48e5-ae18-76d28f22e8f9
+73,2, , ,Alto del Chuscal - Armenia - Titiribí,60AN08-1, ,Segundo Orden, , , ,Alto del Chuscal, Titiribí, ,52.4,53.2,5.356522,0,0, , ,52635.735838940214,d97ba369-1fc0-41e1-9a1f-abccbb6c3369
+74,2, , ,Titiribí - Sinifaná,60AN08-2, ,Tercer Orden, , , ,Titiribí, Sinifaná, ,25.9,25.5,3.987528,0,0, , ,25809.425426457394,c5f7b92c-7409-4dd6-96fd-6982c8c62d7b
+75,2, , ,Camilocé - El Cinco - Fredonia,60AN09, ,Segundo Orden, , , ,Camilocé, Fredonia, ,16.5,16.1,7.757576,0,0, , ,13207.754758386018,bcd1a0e5-6b5b-4736-841c-a441740da316
+76,2, , ,El Cinco - Venecia,60AN09-1, ,Segundo Orden, , , ,El Cinco, Venecia, ,7.3,7.2,7.0,0,0, , ,7143.228860442805,74ec2347-ce74-401d-8186-6547a98e2b7a
+77,2, , ,Mi Casita (Fredonia) - Venecia,60AN09-2, ,Tercer Orden, , , ,Mi Casita (Fredonia), Venecia, ,21.7,21.2,3.69709,0,0, , ,20810.155465873962,e69b2412-e66d-4071-b676-130333beba44
+78,2, , ,La Tolva - Ye a Fredonia,60AN11, ,Segundo Orden, , , ,La Tolva, Ye a Fredonia, ,24.6,23.9,2.225412,0,0, , ,24087.134475237657,700a3cf7-1f23-4980-a1e3-c4195e4dd16a
+79,2, , ,Guarne - San Vicente,60AN12, ,Segundo Orden, , , ,Guarne, San Vicente, ,25.0,25.7,4.223381,0,0, , ,25774.97815227597,df00a48d-8f99-4763-a30f-f34f6ac518b9
+80,2, , ,Berrío (Cruce Ruta 60) - San Vicente,60AN14, ,Segundo Orden, , , ,Berrío (Cruce Ruta 60), San Vicente, ,11.3,11.2,7.0,0,0, , ,11593.757373891849,775a942c-8a35-4697-a4bb-d08d267ad48d
+81,2, , ,San Vicente - El Peñol,60AN14-1, ,Tercer Orden, , , ,San Vicente, El Peñol, ,26.8,26.6,4.9,0,0, , ,26684.396857570657,6e27a60d-607a-40b6-a739-a1f00d779460
+82,2, , ,Marinilla - Peñol,60AN15, ,Segundo Orden, , , ,Marinilla, El Peñol, ,17.0,16.1,7.314286,0,0, , ,16482.113821446168,3c6d8763-9c3d-4cc9-a0e6-c59023e336f2
+83,2, , ,Marinilla - El Santuario - Carmen de Viboral - Canadá,60AN15-1, ,Segundo Orden, , , ,Marinilla, Canadá, ,28.85,29.48425694,4.135842,0,0, , ,28776.630249178215,12f930c8-bd32-4a56-9920-b30c0b2f4f2c
+84,2, , ,La Aurora - Sonadora - Guatape,60AN15-2-1, ,Tercer Orden, , , ,La Aurora,Guatape, ,16.5,17.3,2.7,0,0, , ,16700.151529271683,29865134-eb55-40de-9f42-50069fabe30b
+86,2, , ,Autopista - El Ramal - Granada,60AN16, ,Segundo Orden, , , ,Autopista, Granada, ,12.5,12.9,6.8,0,0, , ,12947.998299674653,7d4fb344-e073-4b61-933c-3adbbba48c91
+87,2, , ,Granada - El Choco - San Carlos,60AN16-1, ,Segundo Orden, , , ,Granada, San Carlos, ,39.8,39.0,6.459259,0,0, , ,39390.29731251795,b645137b-6281-4038-983b-e61500425afd
+88,2, , ,Autopista - Cocorná,60AN17, ,Segundo Orden, , , ,Autopista, Cocorná, ,6.7,6.7,6.307692,0,0, , ,6695.427986849673,377183aa-3bcd-46d9-a6e6-d52b75964c8a
+89,2, , ,Cocorná - El Ramal (Granada),60AN17-1, ,Tercer Orden, , , ,Cocorná, El Ramal (Granada), ,13.0,12.4,4.552027,0,0, , ,12404.682568523698,2902a02f-a293-4ced-9c53-b647069e214b
+90,2, , ,La Piñuela - San Francisco,60AN18, ,Segundo Orden, , , ,La Piñuela, San Francisco, ,12.7,12.6,6.0,0,0, , ,12933.19159448776,12e95c59-c74d-4451-8c43-88cd939c5f42
+91,2, , ,Autopista - San Luis,60AN19, ,Segundo Orden, , , ,Autopista, San Luis, ,6.5,6.4,5.923077,0,0, , ,6449.448878429301,7c78110c-d1ef-4277-aa86-a4d28469b1fd
+92,2, , ,San Carlos - Partidas a San Miguel - Los Planes,60AN19-1, ,Tercer Orden, , , ,San Carlos,Los Planes, ,19.3,19.1,3.212813,0,0, , ,19640.87212311125,65d4c95f-9edb-4ab8-99b8-e48387713992
+93,2, , ,San Luis - El Choco,60AN19-2, ,Tercer Orden, , , ,San Luis,El Choco, ,21.0,20.3,4.354092,0,0, , ,20292.778831043484,1ee28aab-4b78-49f7-b107-9dc3054cacff
+94,2, , ,Santiago Berrío - Mulas - Cruces,60AN20, ,Segundo Orden, , , ,Santiago Berrío,Cruces, ,50.5,48.2,6.16,0,0, , ,48431.6165306711,86a1dc92-0146-4fbc-bed3-ef6105a9a6f4
+95,2, , ,Mulas - Puerto Nare,60AN20-1, ,Segundo Orden, , , ,Mulas, Puerto Nare, ,11.1,11.1,7.0,0,0, , ,11116.19813765846,4d326645-6d4e-42bb-9f9d-90238dfee58f
+96,2, , ,Puerto Nare - Cruces - Narices,60AN20-1-1, ,Tercer Orden, , , ,Puerto Nare,Narices, ,38.2,37.2,4.05071,0,0, , ,31176.54931987845,e0a75742-d371-46ea-a0f9-cff69274918a
+97,2, , ,Narices - La Holanda,60AN20-1-1-1, ,Tercer Orden, , , ,Narices, La Holanda, ,31.6,32.0,3.523242,0,0, , ,33475.38255471743,8257e5dc-9840-41c8-8962-68bf4435f357
+98,2, , ,Autopista - Puerto Triunfo,60AN21, ,Segundo Orden, , , ,Autopista, Puerto Triunfo, ,4.0,3.7,6.875,0,0, , ,3769.665010622471,8dfeb803-cccb-4d6c-ae56-44ec2bf88167
+99,2, , ,Puerto Triunfo - San Miguiel,60AN21-1, ,Tercer Orden, , , ,Puerto Triunfo, San Miguiel, ,22.9,23.2,4.307846,0,0, , ,23238.75665877981,2dc9dd2d-f583-4027-8fba-7540e8a07832
+100,2, , ,Santa Fe de Antioquia - Puente de Occidente - La Ye (Sopetrán),6204B, ,Segundo Orden, , , ,Santa Fe de Antioquia, La Ye (Sopetrán), ,26.8,26671.1715413,6.126316,0,0, , ,26974.07716843232,099fbacd-66eb-45f4-aa7b-0e327341877e
+101,2, , ,San Pedro de Urabá - Pueblito,62AN02-1, ,Segundo Orden, , , ,San Pedro de Urabá, Pueblito, ,8.0,8.62604468,5.0,0,0, , ,7760.394084436321,43819bcd-5646-408b-888c-15cc9981c375
+102,2, , ,San Pedro de Urabá - El Tambito,62AN02-2, ,Tercer Orden, , , ,El Tambito, San Pedro de Urabá, ,57.0,55.35226351,5.0,0,0, , ,54935.88085644916,18bc0efb-8616-4a10-9c09-3f3414c448c9
+103,2, , ,Garrapata - Canalete,62AN02-2-1, ,Tercer Orden, , , ,Garrapata, Canalete, ,4.0,4.35389609,5.0,0,0, , ,4010.205561625495,a4b4a61a-6df5-4e17-8284-a1573daa2f4b
+104,2, , ,Carepa - Saiza,62AN03, ,Tercer Orden, , , ,Carepa, Saiza, ,27.0,27.88145472,5.0,0,0, , ,24537.055276516534,a96b17d3-3c40-4cb5-b6f5-79176c148acf
+105,2, , ,Caucheras - Bajirá,62AN05, ,Tercer Orden, , , ,Caucheras, Bajirá, ,28.0,27.3867636,5.0,0,0, , ,35066.98708919752,442178e1-61cc-4a7f-a70e-0b380bc1f426
+106,2, , ,Mutatá - Pavarando Grande,62AN06, ,Tercer Orden, , , ,Mutatá, Pavarando Grande, ,20.0,19.34203923,5.0,0,0, , ,19215.813707579313,848784fe-1b24-4880-a503-f42cb0cdb283
+107,2, , ,El Chino - Rio Verde,62AN07, ,Tercer Orden, , , ,Rio Verde, El Chino, ,12.83,12.49332361,5.0,0,0, , ,13294.186707678977,d2fcc678-3232-404b-9e85-1212e645b226
+108,2, , ,La Cortada - El mango,62AN21-2, ,Segundo Orden, , , ,La Cortada, El mango, ,44.2,44.88433658,6.701124,0,0, , ,45424.483592190176,7465de70-5387-4b83-8842-3eb350992f99
+109,2, , ,El Mango - Amalfi,62AN21-2-1, ,Segundo Orden, , , ,El Mango, Amalfi, ,23.6,22.94453576,7.0,0,0, , ,23859.417448262357,2e75d35c-b41b-41a8-9136-dc8db40be3b0
+110,2, , ,Yalí - Maceo,62AN21-3, ,Tercer Orden, , , ,Yalí, Maceo, ,18.8,18.38015086,3.8,0,0, , ,18689.66145294799,1c2d4512-5ba2-4770-894a-111e550cd7fa
+111,2, , ,Playas - Chorritos - Amalfi,62AN21-4, ,Tercer Orden, , , ,Playas,Amalfi, ,0.0,0.0,3.657071,0,0, , ,51630.86206876994,3189979a-226a-4d33-b264-96fea62ac076
+112,2, , ,Chorritos - Santa Isabel,62AN21-4-1, ,Tercer Orden, , , ,Chorritos,Santa Isabel, ,0.0,0.0,3.565998,0,0, , ,59688.530422889824,6def05ca-a626-487d-be87-a90a22b5a05a
+113,2, , ,Vegachí - Santa Isabel - Remedios,62AN21-5, ,Segundo Orden, , , ,Vegachí, Remedios, ,43.93,43.53200833,7.487674,0,0, , ,43870.014747178735,3a194e88-7d09-4c68-b2e7-62b8aa78c6c0
+114,2, , ,La Quiebra - Santo Domingo,62AN22, ,Tercer Orden, , , ,La Quiebra, Santo Domingo, ,9.73,9.72292782,5.391087,0,0, , ,9759.571402876347,113984d7-17c1-4fc7-a623-e2526d501f1f
+115,2, , ,Santo Domingo - San Roque,62AN22-1, ,Tercer Orden, , , ,Santo Domingo, San Roque, ,20.53,20.63008653,3.425816,0,0, , ,21010.650490758617,010e8a52-5c7b-4d08-bc2a-50a54ccd02ea
+116,2, , ,San Roque - La Palma,62AN22-1-1, ,Tercer Orden, , , ,San Roque, La Palma, ,33.0,31.47172757,4.805373,0,0, , ,31284.737441115318,89c0360f-34f1-4f69-96b7-692e031793fc
+117,2, , ,Santo Domingo - Alejandria,62AN22-2, ,Tercer Orden, , , ,Santo Domingo, Alejandria, ,18.82,18.8796166,8.453458,0,0, , ,18899.291957380865,e996a5fa-e98a-4622-8229-3d594a4e9229
+118,2, , ,Alejandría - El Bizcocho (San Rafael),62AN22-2-1, ,Tercer Orden, , , ,Alejandría, El Bizcocho (San Rafael), ,18.0,17.71169783,3.394819,0,0, , ,17586.546026335065,2286b540-d242-4805-8a44-7ab1908c742b
+119,2, , ,Sofia - Yolombó,62AN23, ,Tercer Orden, , , ,Sofia, Yolombó, ,11.5,11.43643844,3.474688,0,0, , ,11553.19999340377,0e0cb847-c3cf-4953-a37e-1c9a5c068142
+120,2, , ,San Jorge - San Roque,62AN24, ,Segundo Orden, , , ,San Jorge, San Roque, ,11.3,11.30503169,5.545652,0,0, , ,11299.706118878004,35a8ef74-5716-44e6-8bdd-cd858f31d705
+121,2, , ,Caramanta - San Roque,62AN25, ,Tercer Orden, , , ,Caramanta, San Roque, ,24.24,23.97222848,3.865556,0,0, , ,23980.46045712942,61549bdf-dc9a-4a60-bf62-7b2bc3f4bd89
+122,2, , ,San José del Nus - Caracolí,62AN26, ,Segundo Orden, , , ,San José del Nus, Caracolí, ,18.2,16.9272628,6.486486,0,0, , ,17653.898930607447,217fdf9f-87b9-4b2f-bb0e-97f8261b5f9e
+123,2, , ,Alto Dolores - Maceo,62AN27, ,Segundo Orden, , , ,Alto Dolores, Maceo, ,7.2,7.08773917,6.0,0,0, , ,7173.37557038301,2c06d082-f5b8-4f5b-b9d8-c492a5f10917
+124,2, , ,Marsella - Caracolí,62AN28, ,Tercer Orden, , , ,Marsella, Caracolí, ,21.2,21.86305518,4.125,0,0, , ,25738.173536312435,7c258431-cf10-4beb-8965-a2dd80a56e52
+125,2, , ,Puerto Berrío (Las Flores) - Cruces,62AN30, ,Segundo Orden, , , ,Puerto Berrío (Las Flores),Cruces, ,44.63,43.8007813,3.317682,0,0, , ,43738.646228185346,b9188ff9-f661-4be5-ba4e-6b7f3f03b524
+126,2, , ,El Bobal - San Pedro de Urabá,90AN01, ,Tercer Orden, , , ,El Bobal, San Pedro de Urabá, ,57.0,58.89031258,5.0,0,0, , ,58653.04458359952,e19f960c-64e1-4fe5-8d29-fa7587cd1d0b
+127,2, , ,Mellitos - El Tambito,90AN02, ,Tercer Orden, , , ,Mellitos, El Tambito, ,44.0,42.808455,5.0,0,0, , ,42629.40340728731,e7914c57-7cdb-4bfa-9bd5-4f4d00eebba1
+128,2, , ,Arboletes - El Tambito,90AN03, ,Tercer Orden, , , ,Arboletes, El Tambito, ,26.0,25.70106509,5.0,0,0, , ,25195.838969073284,d5d502ee-787b-45cb-a1e5-f1acb0c70844
+129,2, , ,El Tres - San Pedro de Urabá,62AN02, ,Segundo Orden, , , ,El Tres, San Pedro de Urabá, ,46.668,46626.09723,6.886364,0,0, , ,49638.64175918948,f8571081-6ebb-49f9-b049-f5d00e0ce9bb
+130,2, , ,Molino Viejo - Santo Domingo,62AN20, ,Segundo Orden, , , ,Molino Viejo,Santo Domingo, ,19.2,19.21846074,5.945385,0,0, , ,19289.927460941773,bba7233d-2d96-4ad6-97cc-6459a42f0321
+131,2, , ,Las Flores (Puerto Berrío) - La Ye,62AN29, ,Segundo Orden, , , ,Las Flores (Puerto Berrío),La Ye, ,35.0,34.97908523,5.021429,0,0, , ,34996.87787703292,f057f960-0cd0-457a-aebf-f5cb79631615
+132,2, , ,La Ye - Yondo,62AN29-1, ,Tercer Orden, , , ,La Ye,Yondo, ,101.0,101.10962836,4.109289,0,0, , ,92221.98799447995,6e45b239-47b0-4c5b-8788-afb1563decb7
+133,2, , ,La Metida - Concordia,60AN06, ,Segundo Orden, , , ,La Metida, Concordia, ,21.8,21.6,7.013333,0,0, , ,21733.04244740611,98c57a0e-5720-42b1-b01b-4ee137a59b73
+134,2, , ,San Jerónimo - San Pedro de Los Milagros,62AN16, ,Segundo Orden, , , ,San Jerónimo,San Pedro de Los Milagros, ,31.72,31.85303692,7.0,0,0, , ,34081.27448166223,287e2a9e-9054-4e3a-b177-8b21f1aa1379
+135,2, , ,Ye a La Bodega (Andes) - Puente Lata - Jericó,60AN04-1-1, ,Tercer Orden, , , ,Ye a La Bodega (Andes),Jericó, ,28.0,28.0,3.920399,0,0, , ,28043.7601524764,c9620127-b934-413e-9d2e-1cfaa5228b7d
+136,2, , ,Casa Verde - Aeropuerto- Puerto Zungo,62AN31, ,Primer Orden, , , , , , ,0.0,0.0,0.0,0,0, , ,12883.200488534609,735872cc-da12-4cfa-a57d-39e39389e760
+137,2, , ,Sopetrán - Belmira,62AN15, ,Tercer Orden, , , ,Sopetrán, Belmira, ,44.0,43.49586893,5.0,0,0, , ,43443.10674323134,1b353461-9e5a-4fa8-a3c0-e374f93f6bd4
+138,2, , ,Abejorral - El Cairo -  La Elvira (Sta. Bárbara),56AN05-2, ,Segundo Orden, , , ,Abejorral,  La Elvira (Sta. Bárbara), ,35.5,35.0,5.717494,0,0, , ,35216.5404784746,a7fbfda0-79b8-46a6-854b-83c9aeaa8aff
+139,2, , ,La Frontera (Ruta 56) - Abejorral,56AN07, ,Segundo Orden, , , ,La Frontera (Ruta 56),Abejorral, ,27.6,27.2,5.174915,0,0, , ,27442.868612173414,8afedea9-595c-43d8-ac00-6873d610f2f6
+140,2, , ,Morelia (Ruta 56) - Abejorral,56AN08, ,Segundo Orden, , , ,Morelia (Ruta 56),Abejorral, ,29.0,28.7,4.085556,0,0, , ,29102.862931452466,5a62b48e-ac0c-4583-86db-88b257854591
+141,2, , ,Remolino - Hispania - Puerto Boy - La Bodega - Andes - Jardín - Alto de Ventanas,60AN04, ,Segundo Orden, , , ,Remolino, Alto de Ventanas, ,62.8,61.6,3.37978,0,0, , ,62039.014498895966,c4cd4318-3088-4481-a65a-ded18d840f57
+142,2, , ,Paso Nivel (Ruta 60)  - Ye  Amagá - Angelópolis,60AN10, ,Segundo Orden, , , ,Paso Nivel (Ruta 60),Angelópolis, ,12.9,12.6,6.382272,0,0, , ,13263.582096638522,ca2b880b-1cdf-4636-b998-3563b2f47b23
+143,2, , ,Versalles - Montebello,25AN03, ,Segundo Orden, , , ,Versalles, Montebello, ,11.5,11.5,6.173913,0,0, , ,11600.763547078712,f05b0ea5-d183-4c65-a192-f6f1d5011f07
+144,2, , ,El Chaquiro (Ruta 25) - Te a Labores,25AN10, ,Tercer Orden, , , ,El Chaquiro (Ruta 25), Te a Labores, ,27.9,27.3,4.777826,0,0, , ,27526.12621724205,2924e181-c757-4c5d-a715-d663786b6aba
+145,2, , ,Variante Colmenas (La Ceja - La Unión - Abejorral),56AN05-1, ,Segundo Orden, , , ,Sector La Unión,Sector Santa Ines, ,15.5,14.9,5.875,0,0, , ,14717.660899584616,67a411e6-3941-497f-ad53-befc4bda4d93
+147,2, , ,Partidas a San José de la Montaña - San Andrés de Cuerquia - Matanzas - Ituango,25AN11-1, ,Segundo Orden, , , ,Partidas a San José de la Montaña, Ituango, ,71.0,70.5,7.0,0,0, , ,71285.56919109712,dac6764b-2a3e-4776-a02c-22839956fea5
+148,2, , ,La Ye - Remedios,62AN29-1-1, ,Segundo Orden, , , ,La Ye, Remedios, ,61.1,60.60892401,5.0,0,0, , ,61700.80851973444,60c4daf1-9a13-4b81-b161-012cad7bd6ad
+149,2, , ,Entrerríos - Te a Labores - La Apartada - San José de La Montaña,62AN18-3, ,Tercer Orden, , , ,Entrerríos, San José de La Montaña, ,50.0,50.61783624,3.671487,0,0, , ,50017.072348463174,50563ace-8551-4bb4-b482-1d947a3fc5cd
+150,2, , ,San José - La Eme,25BAN04-2-1, ,Tercer Orden, , , ,San José, La Eme, ,38.0,38.0,4.147249,0,0, , ,38256.61016617447,e2f0bae7-5b5d-4b42-912c-f9aa320d24b7
+151,2, , ,Valparaíso - Caramanta - Puente Arquía,25AN01-3, ,Segundo Orden, , , ,Valparaíso,Puente Arquía, ,23.0,23.0,6.35,0,0, , ,22245.770720234374,61e3aa55-6479-452a-9a22-b935e5951838
+152,2, , ,Santa Rosas de Osos (Ruta 25) - Puente Gavino,25AN08, ,Tercer Orden, , , ,Santa Rosas de Osos (Ruta 25), Puente Gavino, ,49.2,49.2,5.0,0,0, , ,48483.72742273389,ee05e587-3547-4716-9b0f-10a6752482bf
+153,2, , ,Llanos de Cuivá (Ruta 25) - Partidas a San Jose de la Montaña - San Jose de La Montaña,25AN11, ,Segundo Orden, , , ,Llanos de Cuivá (Ruta 25), San Jose de La Montaña, ,30.3,30.4,7.013559,0,0, , ,30352.7639865119,d05f5e99-2d3d-4480-8b7a-82d9e8d3867a
+154,2, , ,Cáceres - La Chilona,25AN15-1, ,Tercer Orden, , , ,Cáceres,La Chilona, ,86.6,86.5,5.0,0,0, , ,81664.71131383894,f711d226-57e6-437b-9473-d365c502dae4
+155,2, , ,Cangrejo (Río Cauca) - Altamira,25BAN04, ,Tercer Orden, , , ,Cangrejo (Río Cauca), Altamira, ,22.5,22.2,3.1,0,0, , ,22024.207574071315,072bf97b-b177-470f-9545-998e8bb6f907
+156,2, , ,Concordia- La Quiebra - Betulia,60AN06-1, ,Segundo Orden, , , ,Concordia, Betulia, ,24.5,23.9,6.042,0,0, , ,23733.204066199207,d53cd88c-7a90-4f21-abc5-b3bd0440e8fb
+157,2, , ,El Peñol - Guatapé - El Bizcocho - San Rafael,60AN15-2, ,Segundo Orden, , , ,El Peñol, San Rafael, ,39.3,39.6,7.721519,0,0, , ,39342.08422130271,749e18d9-8ac7-467a-9793-08a4e324a955
+158,2, , ,Frontino - Abriaquí,62AN10-2, ,Segundo Orden, , , ,Frontino,Abriaquí, ,26.3,25.96031602,5.981132,0,0, , ,25457.278909825374,dedf88e1-bde6-4c87-8acb-ea4938bc8384
+159,2, , ,Puente Iglesias (Ruta 25B) - La Ye - Jericó,25BAN02-2, ,Segundo Orden, , , ,Puente Iglesias (Ruta 25),Jericó, ,18.6,18.7,3.636554,0,0, , ,18539.546782474714,cf225ed4-3282-4675-a5b2-253133b5f6c3
+160,2, , ,La Ye - El Líbano,25BAN01-1, ,Tercer Orden, , , ,La Ye,El Líbano, ,14.3,15.1,4.102678,0,0, , ,14723.909214387486,e7766143-9108-412a-9afb-a337642c20c6
+161,2, , ,Variante Pescadero,25AN11-1_1, ,Segundo Orden, , , ,Valle de Toledo,Pescadero, ,0.0,20.15,0.0,0,0, , ,20150.89661139594,e200e059-76ee-4170-8842-83d2ca8fe46e
+162,2, , ,Variante San Andrés de Cuerquía,25AN11-1_2, ,Segundo Orden, , , ,km 23+700,km 24+900, ,0.0,1.24,0.0,0,0, , ,1249.5606912640217,2091cafc-ed7a-4797-a1e9-1d1ad69d7122
+163,2, , ,Partidas de Zaragoza - Zaragoza,25AN17, ,Segundo Orden, , , ,Partidas de Zaragoza,Zaragoza., ,3.2,3.2,7.021803,0,0, , ,3146.4609475732436,3262e93e-c9c1-4e5b-add9-9cd6dfd924f0
+164,2, , ,Montenegro (La Pintada) - La Fabiana - Valparaíso,25AN01, ,Segundo Orden, , , ,Montenegro (La Pintada), Valparaíso, ,20.7,20.7,6.24186,0,0, , ,20623.37638782432,64471767-5238-4388-8472-daa954412a78
+165,2, , ,Valparaíso - Tamesis,25AN01-2, ,Tercer Orden, , , ,Valparaíso, Tamesis, ,25.0,24.4,3.384755,0,0, , ,24367.97539858352,318ff390-b84e-40fb-93f4-6174b952f56f
+166,2, , ,Puente Nuevo (Ruta 60) - Betania,60AN02, ,Segundo Orden, , , ,Puente Nuevo (Ruta 60),Betania, ,17.4,17.1,3.049248,0,0, , ,17223.107252224832,1839f61a-298e-4cc3-8b43-8426029115db
+167,2, , ,Paso por Caldas,25ANA_1, ,Primer Orden, , , ,Paso por Caldas,Paso por Caldas, ,340.0,340.0,7.0,0,0, , ,340.9986349949712,ecfe40b6-3974-4463-949f-e38f1d8adbd8
+168,2, , ,Ye  Amagá - Ferrería - Angelópolis,60AN10-1, ,Tercer Orden, , , ,Ye  Amagá,Angelópolis, ,15.5,15.3,4.653857,0,0, , ,5367.197293321538,2455984d-4db6-452a-8782-93a271bdd8c5
+169,2, , ,Camilocé - El Cinco - Fredonia,60AN09, ,Segundo Orden, , , ,Camilocé, Fredonia, ,16.5,16.1,7.757576,0,0, , ,3103.5968533872683,500ed0e5-4892-4825-889c-0aa9e4eb95c7
+170,2, , ,San Rafael - La Palma - La Holanda - San Carlos,60AN15-2-2, ,Segundo Orden, , , ,San Rafael,San Carlos, ,41.4,42.1,8.046154,0,0, , ,41923.185199285515,70c5b156-78a6-43ef-879c-5f257908c5a5
+171,2, , ,La Unión - El Carmen de Viboral,56AN06, ,Segundo Orden, , , ,La Unión, El Carmen de Viboral, ,19.3,19.4,4.604266,0,0, , ,18785.622185689153,6eba967c-55c2-4f38-8690-21addad5d9bb

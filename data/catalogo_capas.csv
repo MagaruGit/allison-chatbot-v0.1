@@ -1,0 +1,6 @@
+Nombre_Capa,ID,URL_Servicio
+Red vial primaria,1,https://services5.arcgis.com/K90UQIB09TmTjUL8/arcgis/rest/services/R10/FeatureServer/1
+Red vial secundaria,2,https://services5.arcgis.com/K90UQIB09TmTjUL8/arcgis/rest/services/R10/FeatureServer/2
+Municipios,3,https://services5.arcgis.com/K90UQIB09TmTjUL8/arcgis/rest/services/Divisi%C3%B3n_pol%C3%ADtica_de_Antioquia/FeatureServer/3
+Veredas,2,https://services5.arcgis.com/K90UQIB09TmTjUL8/arcgis/rest/services/Divisi%C3%B3n_pol%C3%ADtica_de_Antioquia/FeatureServer/2
+Red vial terciaria,3,https://services5.arcgis.com/K90UQIB09TmTjUL8/arcgis/rest/services/R10/FeatureServer/3
