@@ -347,6 +347,65 @@ st.markdown("""
         .logo-container img:hover {
             transform: scale(1.05); /* Efecto sutil al pasar el mouse */
         }
+
+        /* --- RESPONSIVE DESIGN (MÓVIL) --- */
+        @media only screen and (max-width: 600px) {
+            /* Ajuste general de fuentes */
+            html {
+                font-size: 14px !important;
+            }
+            
+            /* Header: Logo más pequeño y botones ajustados */
+            header[data-testid="stHeader"] {
+                background-size: auto 50% !important;
+                background-position: 10px center !important;
+            }
+            .header-buttons-container {
+                padding: 0 0.5rem !important;
+            }
+            .header-btn {
+                padding: 0.25rem 0.6rem !important;
+                font-size: 0.75rem !important;
+                margin-top: 5px !important;
+            }
+            
+            /* Logo Principal y Título */
+            .logo-container {
+                padding-top: 10px !important;
+            }
+            .logo-container img {
+                max-width: 140px !important;
+            }
+            .allison-title {
+                font-size: 3.5em !important;
+                margin-top: -5px !important;
+            }
+            
+            /* Textos de bienvenida */
+            #typewriter-1 {
+                font-size: 1rem !important;
+                line-height: 1.3 !important;
+                min-height: 3em !important; /* Espacio para 2 líneas */
+            }
+            #typewriter-2 {
+                font-size: 0.9rem !important;
+            }
+            
+            /* Input de chat (Solo ancho, no posición para no romper estados) */
+            [data-testid="stChatInput"] {
+                width: 92% !important;
+                max-width: 100% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important; /* Mantener centrado */
+            }
+            
+            /* Ajustar padding del contenedor principal */
+            .block-container {
+                padding-top: 1rem !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
     </style>
 """, unsafe_allow_html=True)
 
