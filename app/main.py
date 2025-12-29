@@ -69,7 +69,7 @@ st.markdown("""
             padding: 0 2rem;
             z-index: 999999;
             pointer-events: none; /* Permitir clicks en el header subyacente */
-        }
+        }   
         
         .header-btn-group {
             display: flex;
@@ -116,7 +116,7 @@ st.markdown("""
         
         /* AUMENTAR TAMAÑO BASE (ZOOM) */
         html {
-            font-size: 18px; /* Aumentamos la base de 16px a 18px */
+            font-size: 20px; /* Aumentamos la base de 16px a 20px */
         }
 
         /* Aplicar Expressway a todo el cuerpo, con fallbacks */
@@ -339,7 +339,7 @@ st.markdown("""
             padding-top: 60px; /* Reducido a la mitad para subir todo */
         }
         .logo-container img {
-            max-width: 200px;
+            max-width: 300px;
             height: auto;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15)); /* Sombra flotante */
             transition: transform 0.3s ease;
@@ -464,8 +464,8 @@ if len(st.session_state.messages) == 0:
             top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50%; /* Reducido para ser más pequeña */
-            max-width: 600px; /* Reducido el ancho máximo */
+            width: 70%; /* Aumentado para ser más visible */
+            max-width: 800px; /* Aumentado el ancho máximo */
             z-index: 9999;
             padding: 0 !important;
             animation: floatIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -580,7 +580,7 @@ else:
 
 # --- TÍTULO Y DESCRIPCIÓN ---
 # Fuente Didot aplicada al título, con margen superior reducido para acercarlo al logo
-st.markdown("<h1 class='allison-title' style='text-align: center; font-family: Didot, serif; font-size: 4em; margin-top: -20px; margin-bottom: -10px;'>Allison</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='allison-title' style='text-align: center; font-family: Didot, serif; font-size: 6em; margin-top: -20px; margin-bottom: -10px;'>Allison</h1>", unsafe_allow_html=True)
 
 # Lógica para animar el subtítulo solo una vez por sesión
 if "subtitle_animated" not in st.session_state:
