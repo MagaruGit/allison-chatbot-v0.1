@@ -451,11 +451,11 @@ if len(st.session_state.messages) == 0:
                 display: inline-block;
             }
             
-            /* Ajuste para móviles: Subir el mensaje para que no tape el input */
+            /* Ajuste para móviles: Posicionar entre el subtítulo y el input */
             @media only screen and (max-width: 600px) {
                 #welcome-message {
-                    top: 55% !important; /* Subir del 65% al 55% */
-                    font-size: 1.2rem !important; /* Reducir un poco la fuente */
+                    top: 68% !important; /* Más abajo para no solapar con título */
+                    font-size: 1rem !important; /* Reducir un poco la fuente */
                     width: 90% !important;
                 }
             }
@@ -543,7 +543,7 @@ if len(st.session_state.messages) == 0:
         /* Ajuste móvil para el input inicial */
         @media only screen and (max-width: 600px) {
             [data-testid="stChatInput"] {
-                top: 75% !important; /* Bajar un poco más el input en móvil */
+                top: 82% !important; /* Bajar más el input en móvil para dar espacio al mensaje */
                 width: 90% !important;
             }
         }
@@ -1025,12 +1025,12 @@ components.html("""
     /* Mostrar solo en pantallas pequeñas (móvil) */
     @media only screen and (max-width: 768px) {
         #mic-btn {
-            display: flex;
+            display: flex !important;
         }
     }
 </style>
 
-<div id="mic-btn" onclick="toggleDictation()">
+<div id="mic-btn" onclick="toggleDictation()" style="display: none;">
     <svg id="mic-icon" viewBox="0 0 24 24">
         <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
         <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
@@ -1114,4 +1114,4 @@ components.html("""
         }
     }
 </script>
-""", height=0, width=0)
+""", height=1, width=1)
