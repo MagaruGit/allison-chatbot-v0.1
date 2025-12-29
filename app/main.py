@@ -1032,6 +1032,37 @@ if prompt:
 components.html("""
 <script>
 (function() {
+    // Función para cerrar el teclado
+    function closeKeyboard() {
+        var textareas = window.parent.document.querySelectorAll('textarea');
+        textareas.forEach(function(ta) {
+            ta.blur();
+        });
+        if (window.parent.document.activeElement) {
+            window.parent.document.activeElement.blur();
+        }
+    }
+    
+    // Función para agregar listener al botón de Streamlit
+    function attachSubmitListener() {
+        var submitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
+        if (submitBtn && !submitBtn.hasAttribute('data-allison-listener')) {
+            submitBtn.setAttribute('data-allison-listener', 'true');
+            submitBtn.addEventListener('click', function() {
+                setTimeout(closeKeyboard, 50);
+            });
+        }
+    }
+    
+    // Observador para detectar cuando Streamlit recrea el botón de enviar
+    var observer = new MutationObserver(function() {
+        attachSubmitListener();
+    });
+    observer.observe(window.parent.document.body, { childList: true, subtree: true });
+    
+    // Agregar listener inicial
+    attachSubmitListener();
+    
     // Verificar si ya existe el contenedor para no duplicarlo
     if (window.parent.document.getElementById('allison-action-buttons')) {
         return;
@@ -1097,7 +1128,7 @@ components.html("""
             
             /* Ajustar posición del input para dejar espacio a los botones */
             [data-testid="stChatInput"] {
-                bottom: 75px !important;
+                bottom: 80px !important;
             }
         }
     `;
@@ -1134,11 +1165,8 @@ components.html("""
     
     // Evento click del botón enviar
     sendBtn.onclick = function() {
-        // Cerrar el teclado quitando el foco del textarea
-        var textareas = window.parent.document.querySelectorAll('textarea');
-        textareas.forEach(function(ta) {
-            ta.blur();
-        });
+        // Cerrar el teclado
+        closeKeyboard();
         
         // Buscar el botón de enviar de Streamlit y hacer click
         var submitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
@@ -1147,24 +1175,8 @@ components.html("""
         }
         
         // Asegurar que el foco se quite después del click
-        setTimeout(function() {
-            window.parent.document.activeElement.blur();
-        }, 100);
+        setTimeout(closeKeyboard, 100);
     };
-    
-    // Observar cuando Streamlit envía un mensaje para cerrar el teclado
-    var originalSubmitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
-    if (originalSubmitBtn) {
-        originalSubmitBtn.addEventListener('click', function() {
-            setTimeout(function() {
-                var textareas = window.parent.document.querySelectorAll('textarea');
-                textareas.forEach(function(ta) {
-                    ta.blur();
-                });
-                window.parent.document.activeElement.blur();
-            }, 50);
-        });
-    }
     
     function startDictation() {
         var SpeechRecognition = window.parent.webkitSpeechRecognition || window.parent.SpeechRecognition;
