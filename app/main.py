@@ -247,10 +247,7 @@ st.markdown("""
     </style>
     
     <div class="header-buttons-container">
-        <div class="header-btn-group" style="margin-left: auto;">
-            <button class="header-btn">Contacto</button>
-            <button class="header-btn">Ayuda</button>
-        </div>
+        <!-- Botones removidos -->
     </div>
 """, unsafe_allow_html=True)
 
@@ -628,7 +625,7 @@ if len(st.session_state.messages) == 0:
             /* Ajuste para móviles */
             @media only screen and (max-width: 600px) {
                 #welcome-message {
-                    bottom: 38% !important;
+                    bottom: 32% !important;
                     font-size: 0.85rem !important;
                     width: 95% !important;
                     white-space: nowrap !important;
