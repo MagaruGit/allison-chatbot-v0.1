@@ -157,6 +157,73 @@ header[data-testid="stHeader"] > div:last-child {
 """
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
+# --- JAVASCRIPT PARA ELIMINAR ELEMENTOS DINÁMICAMENTE ---
+# Streamlit Cloud inyecta elementos con JS después del CSS, así que los eliminamos con JS
+components.html("""
+<script>
+(function() {
+    function removeStreamlitBranding() {
+        // Selectores de elementos a eliminar
+        var selectorsToRemove = [
+            // Badges de Streamlit
+            '[class*="viewerBadge"]',
+            '[class*="StatusWidget"]',
+            'a[href*="streamlit.io"]',
+            // Avatar de GitHub
+            'img[src*="avatars"]',
+            'img[src*="github"]',
+            'a[href*="github"]',
+            // Elementos del toolbar
+            '[data-testid="stToolbar"]',
+            '[data-testid="stDecoration"]',
+            '[data-testid="stStatusWidget"]',
+            '[data-testid="manage-app-button"]',
+            // Botones en el header
+            'header button',
+            'header a[target="_blank"]',
+            'header img'
+        ];
+        
+        selectorsToRemove.forEach(function(selector) {
+            var elements = window.parent.document.querySelectorAll(selector);
+            elements.forEach(function(el) {
+                el.remove();
+            });
+        });
+        
+        // También buscar y eliminar el último hijo del header (toolbar)
+        var header = window.parent.document.querySelector('header[data-testid="stHeader"]');
+        if (header && header.lastElementChild) {
+            var lastChild = header.lastElementChild;
+            // Si tiene botones o imágenes, eliminarlo
+            if (lastChild.querySelector('button') || lastChild.querySelector('img') || lastChild.querySelector('a')) {
+                lastChild.remove();
+            }
+        }
+    }
+    
+    // Ejecutar inmediatamente
+    removeStreamlitBranding();
+    
+    // Ejecutar después de que cargue
+    window.parent.document.addEventListener('DOMContentLoaded', removeStreamlitBranding);
+    
+    // Ejecutar periódicamente por si Streamlit los re-inyecta
+    setInterval(removeStreamlitBranding, 1000);
+    
+    // Observador para detectar cuando se agregan nuevos elementos
+    var observer = new MutationObserver(function(mutations) {
+        removeStreamlitBranding();
+    });
+    
+    observer.observe(window.parent.document.body, {
+        childList: true,
+        subtree: true
+    });
+})();
+</script>
+""", height=0, width=0)
+
 # --- BOTONES EN EL HEADER (Visualización) ---
 st.markdown("""
     <style>
