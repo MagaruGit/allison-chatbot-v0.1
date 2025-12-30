@@ -606,7 +606,7 @@ if len(st.session_state.messages) == 0:
         <style>
             #welcome-message {
                 position: fixed;
-                top: 65%;
+                top: 55%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 80%;
@@ -701,7 +701,7 @@ if len(st.session_state.messages) == 0:
         
         [data-testid="stChatInput"] {
             position: fixed;
-            top: 70%;
+            top: 78%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 70%; /* Aumentado para ser más visible */
