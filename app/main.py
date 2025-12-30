@@ -857,7 +857,7 @@ else:
         /* Ajuste móvil para el input en modo chat activo */
         @media only screen and (max-width: 600px) {
             [data-testid="stChatInput"] {
-                bottom: 15px !important;
+                bottom: 85px !important; /* Subido para no solaparse con botones de micrófono/enviar */
                 width: 92% !important;
                 max-width: 100% !important;
                 left: 50% !important;
@@ -1322,7 +1322,7 @@ components.html("""
             
             /* Ajustar posición del input para dejar espacio a los botones */
             [data-testid="stChatInput"] {
-                bottom: 80px !important;
+                bottom: 85px !important;
             }
         }
     `;
