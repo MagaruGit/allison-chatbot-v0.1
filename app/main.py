@@ -176,84 +176,27 @@ header[data-testid="stHeader"] > div:last-child {
 """
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
-# --- JAVASCRIPT PARA ELIMINAR ELEMENTOS DINÁMICAMENTE ---
-# Streamlit Cloud inyecta elementos con JS después del CSS, así que los eliminamos con JS
+# --- JAVASCRIPT SIMPLIFICADO PARA OCULTAR BRANDING ---
+# Solo ocultamos elementos específicos de Streamlit Cloud, sin eliminar nada crítico
 components.html("""
 <script>
 (function() {
-    function removeStreamlitBranding() {
-        // Selectores de elementos a eliminar
-        var selectorsToRemove = [
-            // Clases específicas que funcionaron a otros usuarios
-            '.css-1jc7ptx',
-            '.e1ewe7hr3',
-            '.viewerBadge_container__1QSob',
-            '.styles_viewerBadge__1yB5_',
-            '.viewerBadge_link__1S137',
-            '.viewerBadge_text__1JaDK',
-            '.css-14xtw13',
-            '.e8zbici0',
-            '.css-1dp5vir',
-            '.e1ewe7hr1',
-            '.css-1adrfps',
-            '.css-z5fcl4',
-            '.e1ewe7hr0',
-            // Badges de Streamlit
-            '[class*="viewerBadge"]',
-            '[class*="StatusWidget"]',
-            '[class*="stDeployButton"]',
-            'a[href*="streamlit.io"]',
-            // Avatar de GitHub
-            'img[src*="avatars"]',
-            'img[src*="github"]',
-            'a[href*="github"]',
-            // Elementos del toolbar
-            '[data-testid="stToolbar"]',
-            '[data-testid="stDecoration"]',
-            '[data-testid="stStatusWidget"]',
-            '[data-testid="manage-app-button"]',
-            // Botones en el header
-            'header button',
-            'header a[target="_blank"]',
-            'header img'
-        ];
-        
-        selectorsToRemove.forEach(function(selector) {
-            var elements = window.parent.document.querySelectorAll(selector);
-            elements.forEach(function(el) {
-                el.remove();
-            });
-        });
-        
-        // También buscar y eliminar el último hijo del header (toolbar)
-        var header = window.parent.document.querySelector('header[data-testid="stHeader"]');
-        if (header && header.lastElementChild) {
-            var lastChild = header.lastElementChild;
-            // Si tiene botones o imágenes, eliminarlo
-            if (lastChild.querySelector('button') || lastChild.querySelector('img') || lastChild.querySelector('a')) {
-                lastChild.remove();
-            }
+    // Solo ocultar badges de Streamlit Cloud, sin eliminar elementos del DOM
+    var style = window.parent.document.createElement('style');
+    style.textContent = `
+        [class*="viewerBadge"],
+        [class*="StatusWidget"],
+        [data-testid="stToolbar"],
+        [data-testid="stDecoration"],
+        [data-testid="stStatusWidget"],
+        [data-testid="manage-app-button"],
+        .stDeployButton,
+        a[href*="streamlit.io/cloud"] {
+            display: none !important;
+            visibility: hidden !important;
         }
-    }
-    
-    // Ejecutar inmediatamente
-    removeStreamlitBranding();
-    
-    // Ejecutar después de que cargue
-    window.parent.document.addEventListener('DOMContentLoaded', removeStreamlitBranding);
-    
-    // Ejecutar periódicamente por si Streamlit los re-inyecta
-    setInterval(removeStreamlitBranding, 1000);
-    
-    // Observador para detectar cuando se agregan nuevos elementos
-    var observer = new MutationObserver(function(mutations) {
-        removeStreamlitBranding();
-    });
-    
-    observer.observe(window.parent.document.body, {
-        childList: true,
-        subtree: true
-    });
+    `;
+    window.parent.document.head.appendChild(style);
 })();
 </script>
 """, height=0, width=0)
