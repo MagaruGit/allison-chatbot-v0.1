@@ -810,7 +810,7 @@ else:
         /* Ajuste móvil para el input en modo chat activo */
         @media only screen and (max-width: 600px) {
             [data-testid="stChatInput"] {
-                bottom: 75px !important; /* Subido para no solaparse con botones de micrófono/enviar */
+                bottom: 85px !important; /* Subido para no solaparse con botones de micrófono/enviar */
                 width: 92% !important;
                 max-width: 100% !important;
                 left: 50% !important;
@@ -1221,7 +1221,7 @@ components.html("""
     style.textContent = `
         #allison-action-buttons {
             position: fixed;
-            bottom: 15px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             display: none;
@@ -1276,7 +1276,7 @@ components.html("""
             
             /* Ajustar posición del input para dejar espacio a los botones */
             [data-testid="stChatInput"] {
-                bottom: 75px !important;
+                bottom: 85px !important;
                 transition: bottom 0.3s ease !important;
             }
             
@@ -1418,7 +1418,7 @@ components.html("""
             textarea.addEventListener('blur', function() {
                 if (window.innerWidth <= 768) {
                     setTimeout(function() {
-                        chatInput.style.bottom = '75px';
+                        chatInput.style.bottom = '85px';
                         if (actionButtons) {
                             actionButtons.style.display = 'flex';
                         }
