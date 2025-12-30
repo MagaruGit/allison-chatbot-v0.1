@@ -810,13 +810,14 @@ else:
         /* Ajuste móvil para el input en modo chat activo */
         @media only screen and (max-width: 600px) {
             [data-testid="stChatInput"] {
-                bottom: 100px !important; /* Subido para no solaparse con botones de micrófono/enviar */
+                bottom: 75px !important; /* Subido para no solaparse con botones de micrófono/enviar */
                 width: 92% !important;
                 max-width: 100% !important;
                 left: 50% !important;
                 right: auto !important;
                 transform: translateX(-50%) !important;
                 margin: 0 !important;
+                transition: bottom 0.3s ease !important;
             }
         }
     </style>
@@ -1275,7 +1276,13 @@ components.html("""
             
             /* Ajustar posición del input para dejar espacio a los botones */
             [data-testid="stChatInput"] {
-                bottom: 100px !important;
+                bottom: 75px !important;
+                transition: bottom 0.3s ease !important;
+            }
+            
+            /* Cuando el teclado está abierto, subir el input */
+            [data-testid="stChatInput"].keyboard-open {
+                bottom: 50% !important;
             }
         }
     `;
@@ -1387,6 +1394,48 @@ components.html("""
     
     // Agregar contenedor al body del padre
     window.parent.document.body.appendChild(container);
+    
+    // --- DETECTAR TECLADO VIRTUAL EN MÓVIL ---
+    // Detectar cuando el textarea recibe foco (teclado se abre)
+    function setupKeyboardDetection() {
+        var chatInput = window.parent.document.querySelector('[data-testid="stChatInput"]');
+        var textarea = window.parent.document.querySelector('[data-testid="stChatInput"] textarea');
+        var actionButtons = window.parent.document.getElementById('allison-action-buttons');
+        
+        if (textarea && chatInput) {
+            // Cuando el textarea recibe foco (teclado se abre)
+            textarea.addEventListener('focus', function() {
+                if (window.innerWidth <= 768) {
+                    chatInput.style.bottom = '45%';
+                    chatInput.style.transition = 'bottom 0.3s ease';
+                    if (actionButtons) {
+                        actionButtons.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Cuando el textarea pierde foco (teclado se cierra)
+            textarea.addEventListener('blur', function() {
+                if (window.innerWidth <= 768) {
+                    setTimeout(function() {
+                        chatInput.style.bottom = '75px';
+                        if (actionButtons) {
+                            actionButtons.style.display = 'flex';
+                        }
+                    }, 100);
+                }
+            });
+        }
+    }
+    
+    // Ejecutar después de que Streamlit cargue completamente
+    setTimeout(setupKeyboardDetection, 1000);
+    
+    // Re-ejecutar si cambia el DOM (Streamlit puede recrear elementos)
+    var keyboardObserver = new MutationObserver(function() {
+        setupKeyboardDetection();
+    });
+    keyboardObserver.observe(window.parent.document.body, { childList: true, subtree: true });
 })();
 </script>
 """, height=0, width=0)
