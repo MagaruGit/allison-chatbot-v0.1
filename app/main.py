@@ -56,25 +56,63 @@ else:
     """, unsafe_allow_html=True)
 
 # --- Ocultar footer y badges/avatares de Streamlit/GitHub (global) ---
-# Prueba directa del snippet compartido y ampliación para otros elementos de Streamlit Cloud
 hide_streamlit_footer = """
 <style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden; display: none !important;}
+/* Ocultar menú hamburguesa y footer */
+#MainMenu {visibility: hidden !important; display: none !important;}
+footer {visibility: hidden !important; display: none !important; height: 0 !important;}
 
-/* Ocultar badge "Hosted with Streamlit" y botones/avatares del header */
+/* Ocultar TODOS los elementos de Streamlit Cloud */
+/* Badge "Hosted with Streamlit" */
 .viewerBadge_container__r5I1v,
 .viewerBadge_link__qRIco,
 .styles_viewerBadge__CvC9N,
+div[class*="viewerBadge"],
+a[href*="streamlit.io/cloud"],
+a[href*="streamlit.io"][target="_blank"],
+
+/* Botones de deploy/manage */
 [data-testid="stDecoration"],
 [data-testid="stStatusWidget"],
 [data-testid="manage-app-button"],
+[data-testid="stToolbar"],
 .stDeployButton,
-button[kind="header"] {
+button[kind="header"],
+
+/* Avatar de GitHub / perfil */
+img[src*="avatars.githubusercontent.com"],
+img[src*="github"],
+a[href*="github.com"],
+div[class*="StatusWidget"],
+
+/* Elementos en el header de Streamlit Cloud */
+header[data-testid="stHeader"] button,
+header[data-testid="stHeader"] a[target="_blank"],
+header[data-testid="stHeader"] img[alt*="avatar"],
+header[data-testid="stHeader"] img[alt*="Avatar"],
+
+/* Toolbar y decoraciones */
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+.stToolbar,
+
+/* Cualquier elemento fijo en esquinas (típico de badges) */
+div[style*="position: fixed"][style*="bottom"][style*="right"],
+div[style*="position: fixed"][style*="top"][style*="right"] img {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Forzar ocultar el toolbar del header */
+header[data-testid="stHeader"] > div:last-child {
+    display: none !important;
 }
 </style>
 """
