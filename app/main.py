@@ -1162,321 +1162,210 @@ if prompt:
 components.html("""
 <script>
 (function() {
-    // Función para cerrar el teclado
-    function closeKeyboard() {
-        var textareas = window.parent.document.querySelectorAll('textarea');
-        textareas.forEach(function(ta) {
-            ta.blur();
-        });
-        if (window.parent.document.activeElement) {
-            window.parent.document.activeElement.blur();
-        }
-    }
+    var parentDoc = window.parent.document;
+    var parentWin = window.parent;
     
-    // Función para agregar listener al botón de Streamlit
-    function attachSubmitListener() {
-        var submitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
-        if (submitBtn && !submitBtn.hasAttribute('data-allison-listener')) {
-            submitBtn.setAttribute('data-allison-listener', 'true');
-            submitBtn.addEventListener('click', function() {
-                setTimeout(closeKeyboard, 50);
-            });
-        }
-    }
-    
-    // Observador para detectar cuando Streamlit recrea el botón de enviar
-    var observer = new MutationObserver(function() {
-        attachSubmitListener();
-    });
-    observer.observe(window.parent.document.body, { childList: true, subtree: true });
-    
-    // Agregar listener inicial
-    attachSubmitListener();
-    
-    // Verificar si ya existe el contenedor para no duplicarlo
-    if (window.parent.document.getElementById('allison-action-buttons')) {
-        return;
-    }
-    
-    // Crear estilos en el documento padre
-    var style = window.parent.document.createElement('style');
-    style.textContent = `
-        #allison-action-buttons {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            z-index: 999999;
-        }
-        
-        .allison-action-btn {
-            width: 50px;
-            height: 50px;
-            background-color: rgb(3, 110, 58);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-            border: 2px solid white;
-        }
-        
-        .allison-action-btn:active {
-            transform: scale(0.95);
-            background-color: rgb(2, 80, 42);
-        }
-        
-        .allison-action-btn.listening {
-            background-color: #cc0000 !important;
-            animation: mic-pulse 1.5s infinite;
-        }
-        
-        @keyframes mic-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(204, 0, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0); }
-        }
-        
-        .allison-action-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
-        
-        /* Mostrar solo en móvil */
-        @media only screen and (max-width: 768px) {
-            #allison-action-buttons {
-                display: flex !important;
-            }
-        }
-    `;
-    window.parent.document.head.appendChild(style);
-    
-    // Crear contenedor de botones
-    var container = window.parent.document.createElement('div');
-    container.id = 'allison-action-buttons';
-    
-    // Crear botón de micrófono
-    var micBtn = window.parent.document.createElement('div');
-    micBtn.className = 'allison-action-btn';
-    micBtn.id = 'mic-btn-allison';
-    micBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
-    
-    // Crear botón de enviar
-    var sendBtn = window.parent.document.createElement('div');
-    sendBtn.className = 'allison-action-btn';
-    sendBtn.id = 'send-btn-allison';
-    sendBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
-    
-    // Guardar estado en window.parent para persistir entre rerenders
-    if (!window.parent.allisonMicState) {
-        window.parent.allisonMicState = {
+    // Inicializar estado global en window.parent (persiste entre rerenders de Streamlit)
+    if (!parentWin.allisonButtons) {
+        parentWin.allisonButtons = {
+            initialized: false,
             recognition: null,
             isListening: false
         };
     }
-    var micState = window.parent.allisonMicState;
+    var state = parentWin.allisonButtons;
     
-    // Función para encontrar el textarea actual (Streamlit lo recrea)
+    // Funciones helper
     function getTextarea() {
-        return window.parent.document.querySelector('[data-testid="stChatInputTextArea"]') ||
-               window.parent.document.querySelector('textarea[placeholder]') ||
-               window.parent.document.querySelector('textarea');
+        return parentDoc.querySelector('[data-testid="stChatInputTextArea"]') ||
+               parentDoc.querySelector('textarea');
     }
     
-    // Función para encontrar el botón de enviar de Streamlit
     function getSubmitButton() {
-        return window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]') ||
-               window.parent.document.querySelector('button[kind="primaryFormSubmit"]') ||
-               window.parent.document.querySelector('.stChatInput button');
+        return parentDoc.querySelector('[data-testid="stChatInputSubmitButton"]');
     }
     
-    // Función para actualizar UI del micrófono
     function updateMicUI(listening) {
-        var mic = window.parent.document.getElementById('mic-btn-allison');
+        var mic = parentDoc.getElementById('mic-btn-allison');
         if (mic) {
-            if (listening) {
-                mic.classList.add('listening');
-            } else {
-                mic.classList.remove('listening');
-            }
+            mic.classList.toggle('listening', listening);
         }
     }
-    
-    // Función para detener dictado de forma limpia
-    function stopDictation() {
-        console.log('Stopping dictation...');
-        micState.isListening = false;
-        updateMicUI(false);
-        
-        if (micState.recognition) {
-            try { 
-                micState.recognition.abort();
-            } catch(e) {
-                console.log('Error aborting:', e);
-            }
-            micState.recognition = null;
-        }
-    }
-    
-    // Función para iniciar dictado
-    function startDictation() {
-        console.log('Starting dictation...');
-        
-        // Primero limpiar cualquier sesión anterior
-        stopDictation();
-        
-        var SpeechRecognition = window.parent.webkitSpeechRecognition || window.parent.SpeechRecognition;
-        if (!SpeechRecognition) {
-            alert("Tu navegador no soporta reconocimiento de voz. Usa Chrome en Android.");
-            return;
-        }
-        
-        // Crear nueva instancia cada vez
-        var newRecognition = new SpeechRecognition();
-        newRecognition.continuous = false;
-        newRecognition.interimResults = false;
-        newRecognition.lang = "es-ES";
-        newRecognition.maxAlternatives = 1;
-        
-        newRecognition.onstart = function() {
-            console.log('Recognition onstart fired');
-            micState.isListening = true;
-            updateMicUI(true);
-        };
-        
-        newRecognition.onerror = function(e) {
-            console.error('Speech recognition error:', e.error);
-            stopDictation();
-        };
-        
-        newRecognition.onend = function() {
-            console.log('Recognition onend fired');
-            // Solo limpiar si todavía estamos en modo escucha
-            if (micState.isListening) {
-                stopDictation();
-            }
-        };
-        
-        newRecognition.onresult = function(e) {
-            if (e.results && e.results.length > 0) {
-                var transcript = e.results[0][0].transcript;
-                console.log('Got transcript:', transcript);
-                insertText(transcript);
-            }
-            stopDictation();
-        };
-        
-        micState.recognition = newRecognition;
-        
-        // Iniciar con pequeño delay para asegurar limpieza
-        setTimeout(function() {
-            try {
-                newRecognition.start();
-                console.log('Recognition.start() called');
-            } catch(e) {
-                console.error('Error starting recognition:', e);
-                stopDictation();
-            }
-        }, 100);
-    }
-    
-    // Evento click del micrófono - usando touchend para móvil
-    function handleMicClick(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Mic clicked, isListening:', micState.isListening);
-        
-        if (micState.isListening) {
-            stopDictation();
-        } else {
-            startDictation();
-        }
-    }
-    
-    micBtn.addEventListener('click', handleMicClick);
-    micBtn.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        handleMicClick(e);
-    });
-    
-    // Evento click del botón enviar
-    function handleSendClick(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Send button clicked');
-        
-        var submitBtn = getSubmitButton();
-        console.log('Submit button found:', submitBtn);
-        
-        if (submitBtn && !submitBtn.disabled) {
-            submitBtn.click();
-        } else {
-            var textarea = getTextarea();
-            if (textarea && textarea.value.trim()) {
-                var enterEvent = new KeyboardEvent('keydown', {
-                    key: 'Enter',
-                    code: 'Enter',
-                    keyCode: 13,
-                    which: 13,
-                    bubbles: true
-                });
-                textarea.dispatchEvent(enterEvent);
-            }
-        }
-    }
-    
-    sendBtn.addEventListener('click', handleSendClick);
-    sendBtn.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        handleSendClick(e);
-    });
     
     function insertText(text) {
         var ta = getTextarea();
         if (ta) {
-            console.log('Found textarea, inserting text');
-            var nativeSetter = Object.getOwnPropertyDescriptor(window.parent.HTMLTextAreaElement.prototype, "value").set;
+            var nativeSetter = Object.getOwnPropertyDescriptor(parentWin.HTMLTextAreaElement.prototype, "value").set;
             nativeSetter.call(ta, text);
             ta.dispatchEvent(new Event('input', { bubbles: true }));
             ta.focus();
+        }
+    }
+    
+    function stopDictation() {
+        state.isListening = false;
+        updateMicUI(false);
+        if (state.recognition) {
+            try { state.recognition.abort(); } catch(e) {}
+            state.recognition = null;
+        }
+    }
+    
+    function startDictation() {
+        stopDictation();
+        
+        var SpeechRecognition = parentWin.webkitSpeechRecognition || parentWin.SpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Tu navegador no soporta reconocimiento de voz.");
+            return;
+        }
+        
+        var rec = new SpeechRecognition();
+        rec.continuous = false;
+        rec.interimResults = false;
+        rec.lang = "es-ES";
+        
+        rec.onstart = function() {
+            state.isListening = true;
+            updateMicUI(true);
+        };
+        
+        rec.onerror = function() { stopDictation(); };
+        rec.onend = function() { stopDictation(); };
+        
+        rec.onresult = function(e) {
+            if (e.results && e.results[0]) {
+                insertText(e.results[0][0].transcript);
+            }
+            stopDictation();
+        };
+        
+        state.recognition = rec;
+        setTimeout(function() {
+            try { rec.start(); } catch(e) { stopDictation(); }
+        }, 100);
+    }
+    
+    // Handlers guardados en window.parent para persistir
+    parentWin.allisonHandleMic = function(e) {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        if (state.isListening) {
+            stopDictation();
         } else {
-            console.log('No textarea found');
+            startDictation();
+        }
+    };
+    
+    parentWin.allisonHandleSend = function(e) {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        var btn = getSubmitButton();
+        if (btn && !btn.disabled) {
+            btn.click();
+        }
+    };
+    
+    // Crear UI solo si no existe
+    if (!parentDoc.getElementById('allison-action-buttons')) {
+        // Estilos
+        var style = parentDoc.createElement('style');
+        style.id = 'allison-action-styles';
+        style.textContent = `
+            #allison-action-buttons {
+                position: fixed;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+                flex-direction: row;
+                gap: 20px;
+                z-index: 999999;
+            }
+            .allison-action-btn {
+                width: 50px;
+                height: 50px;
+                background-color: rgb(3, 110, 58);
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                cursor: pointer;
+                border: 2px solid white;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            .allison-action-btn:active {
+                transform: scale(0.95);
+                background-color: rgb(2, 80, 42);
+            }
+            .allison-action-btn.listening {
+                background-color: #cc0000 !important;
+                animation: mic-pulse 1.5s infinite;
+            }
+            @keyframes mic-pulse {
+                0% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.7); }
+                70% { box-shadow: 0 0 0 15px rgba(204, 0, 0, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0); }
+            }
+            .allison-action-btn svg {
+                width: 24px;
+                height: 24px;
+                fill: white;
+                pointer-events: none;
+            }
+            @media only screen and (max-width: 768px) {
+                #allison-action-buttons { display: flex !important; }
+            }
+        `;
+        if (!parentDoc.getElementById('allison-action-styles')) {
+            parentDoc.head.appendChild(style);
+        }
+        
+        // Contenedor
+        var container = parentDoc.createElement('div');
+        container.id = 'allison-action-buttons';
+        
+        // Botón micrófono
+        var micBtn = parentDoc.createElement('div');
+        micBtn.className = 'allison-action-btn';
+        micBtn.id = 'mic-btn-allison';
+        micBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
+        
+        // Botón enviar
+        var sendBtn = parentDoc.createElement('div');
+        sendBtn.className = 'allison-action-btn';
+        sendBtn.id = 'send-btn-allison';
+        sendBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
+        
+        container.appendChild(micBtn);
+        container.appendChild(sendBtn);
+        parentDoc.body.appendChild(container);
+    }
+    
+    // SIEMPRE re-vincular eventos (usando atributos onclick para que persistan)
+    var micBtn = parentDoc.getElementById('mic-btn-allison');
+    var sendBtn = parentDoc.getElementById('send-btn-allison');
+    
+    if (micBtn) {
+        micBtn.onclick = parentWin.allisonHandleMic;
+        micBtn.ontouchend = function(e) { e.preventDefault(); parentWin.allisonHandleMic(e); };
+    }
+    
+    if (sendBtn) {
+        sendBtn.onclick = parentWin.allisonHandleSend;
+        sendBtn.ontouchend = function(e) { e.preventDefault(); parentWin.allisonHandleSend(e); };
+    }
+    
+    // Asegurar visibilidad
+    function ensureVisible() {
+        var btns = parentDoc.getElementById('allison-action-buttons');
+        if (btns && parentWin.innerWidth <= 768) {
+            btns.style.display = 'flex';
         }
     }
     
-    // Agregar botones al contenedor
-    container.appendChild(micBtn);
-    container.appendChild(sendBtn);
-    
-    // Agregar contenedor al body del padre
-    window.parent.document.body.appendChild(container);
-    
-    // Asegurar que los botones siempre estén visibles en móvil
-    function ensureButtonsVisible() {
-        var actionButtons = window.parent.document.getElementById('allison-action-buttons');
-        if (actionButtons && window.innerWidth <= 768) {
-            actionButtons.style.display = 'flex';
-        }
-    }
-    
-    // Re-asegurar visibilidad después de cada actualización de Streamlit
-    var visibilityObserver = new MutationObserver(function() {
-        setTimeout(ensureButtonsVisible, 100);
-    });
-    visibilityObserver.observe(window.parent.document.body, { childList: true, subtree: true });
-    
-    // También verificar periódicamente
-    setInterval(ensureButtonsVisible, 2000);
-    
-    console.log('Allison buttons initialized successfully');
+    ensureVisible();
+    setInterval(ensureVisible, 1000);
 })();
 </script>
 """, height=0, width=0)
