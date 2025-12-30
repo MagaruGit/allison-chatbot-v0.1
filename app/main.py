@@ -1275,9 +1275,14 @@ components.html("""
     sendBtn.id = 'send-btn-allison';
     sendBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
     
-    // Variables para reconocimiento de voz
-    var recognition = null;
-    var isListening = false;
+    // Guardar estado en window.parent para persistir entre rerenders
+    if (!window.parent.allisonMicState) {
+        window.parent.allisonMicState = {
+            recognition: null,
+            isListening: false
+        };
+    }
+    var micState = window.parent.allisonMicState;
     
     // Función para encontrar el textarea actual (Streamlit lo recrea)
     function getTextarea() {
@@ -1293,43 +1298,127 @@ components.html("""
                window.parent.document.querySelector('.stChatInput button');
     }
     
-    // Evento click del micrófono
-    micBtn.onclick = function(e) {
+    // Función para actualizar UI del micrófono
+    function updateMicUI(listening) {
+        var mic = window.parent.document.getElementById('mic-btn-allison');
+        if (mic) {
+            if (listening) {
+                mic.classList.add('listening');
+            } else {
+                mic.classList.remove('listening');
+            }
+        }
+    }
+    
+    // Función para detener dictado de forma limpia
+    function stopDictation() {
+        console.log('Stopping dictation...');
+        micState.isListening = false;
+        updateMicUI(false);
+        
+        if (micState.recognition) {
+            try { 
+                micState.recognition.abort();
+            } catch(e) {
+                console.log('Error aborting:', e);
+            }
+            micState.recognition = null;
+        }
+    }
+    
+    // Función para iniciar dictado
+    function startDictation() {
+        console.log('Starting dictation...');
+        
+        // Primero limpiar cualquier sesión anterior
+        stopDictation();
+        
+        var SpeechRecognition = window.parent.webkitSpeechRecognition || window.parent.SpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Tu navegador no soporta reconocimiento de voz. Usa Chrome en Android.");
+            return;
+        }
+        
+        // Crear nueva instancia cada vez
+        var newRecognition = new SpeechRecognition();
+        newRecognition.continuous = false;
+        newRecognition.interimResults = false;
+        newRecognition.lang = "es-ES";
+        newRecognition.maxAlternatives = 1;
+        
+        newRecognition.onstart = function() {
+            console.log('Recognition onstart fired');
+            micState.isListening = true;
+            updateMicUI(true);
+        };
+        
+        newRecognition.onerror = function(e) {
+            console.error('Speech recognition error:', e.error);
+            stopDictation();
+        };
+        
+        newRecognition.onend = function() {
+            console.log('Recognition onend fired');
+            // Solo limpiar si todavía estamos en modo escucha
+            if (micState.isListening) {
+                stopDictation();
+            }
+        };
+        
+        newRecognition.onresult = function(e) {
+            if (e.results && e.results.length > 0) {
+                var transcript = e.results[0][0].transcript;
+                console.log('Got transcript:', transcript);
+                insertText(transcript);
+            }
+            stopDictation();
+        };
+        
+        micState.recognition = newRecognition;
+        
+        // Iniciar con pequeño delay para asegurar limpieza
+        setTimeout(function() {
+            try {
+                newRecognition.start();
+                console.log('Recognition.start() called');
+            } catch(e) {
+                console.error('Error starting recognition:', e);
+                stopDictation();
+            }
+        }, 100);
+    }
+    
+    // Evento click del micrófono - usando touchend para móvil
+    function handleMicClick(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Mic button clicked');
-        if (isListening) {
+        console.log('Mic clicked, isListening:', micState.isListening);
+        
+        if (micState.isListening) {
             stopDictation();
         } else {
             startDictation();
         }
-    };
+    }
+    
+    micBtn.addEventListener('click', handleMicClick);
+    micBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        handleMicClick(e);
+    });
     
     // Evento click del botón enviar
-    sendBtn.onclick = function(e) {
+    function handleSendClick(e) {
         e.preventDefault();
         e.stopPropagation();
         console.log('Send button clicked');
         
-        // Buscar el botón de enviar de Streamlit y hacer click
         var submitBtn = getSubmitButton();
         console.log('Submit button found:', submitBtn);
         
-        if (submitBtn) {
-            // Simular click de forma más robusta
+        if (submitBtn && !submitBtn.disabled) {
             submitBtn.click();
-            
-            // También intentar con dispatchEvent
-            setTimeout(function() {
-                var clickEvent = new MouseEvent('click', {
-                    view: window.parent,
-                    bubbles: true,
-                    cancelable: true
-                });
-                submitBtn.dispatchEvent(clickEvent);
-            }, 50);
         } else {
-            // Si no encuentra el botón, intentar enviar por Enter
             var textarea = getTextarea();
             if (textarea && textarea.value.trim()) {
                 var enterEvent = new KeyboardEvent('keydown', {
@@ -1342,54 +1431,13 @@ components.html("""
                 textarea.dispatchEvent(enterEvent);
             }
         }
-    };
-    
-    function startDictation() {
-        var SpeechRecognition = window.parent.webkitSpeechRecognition || window.parent.SpeechRecognition;
-        if (SpeechRecognition) {
-            recognition = new SpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            recognition.lang = "es-ES";
-            
-            recognition.onstart = function() {
-                isListening = true;
-                var mic = window.parent.document.getElementById('mic-btn-allison');
-                if (mic) mic.classList.add('listening');
-                console.log('Listening started');
-            };
-            
-            recognition.onerror = function(e) {
-                console.error('Speech recognition error:', e);
-                stopDictation();
-            };
-            
-            recognition.onend = function() {
-                console.log('Listening ended');
-                stopDictation();
-            };
-            
-            recognition.onresult = function(e) {
-                var transcript = e.results[0][0].transcript;
-                console.log('Transcript:', transcript);
-                insertText(transcript);
-                stopDictation();
-            };
-            
-            recognition.start();
-        } else {
-            alert("Tu navegador no soporta reconocimiento de voz. Usa Chrome en Android.");
-        }
     }
     
-    function stopDictation() {
-        isListening = false;
-        var mic = window.parent.document.getElementById('mic-btn-allison');
-        if (mic) mic.classList.remove('listening');
-        if (recognition) {
-            try { recognition.stop(); } catch(e) {}
-        }
-    }
+    sendBtn.addEventListener('click', handleSendClick);
+    sendBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        handleSendClick(e);
+    });
     
     function insertText(text) {
         var ta = getTextarea();
@@ -1427,6 +1475,8 @@ components.html("""
     
     // También verificar periódicamente
     setInterval(ensureButtonsVisible, 2000);
+    
+    console.log('Allison buttons initialized successfully');
 })();
 </script>
 """, height=0, width=0)
