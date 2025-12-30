@@ -701,33 +701,39 @@ if len(st.session_state.messages) == 0:
         }
         
         [data-testid="stChatInput"] {
-            position: fixed;
-            top: 78%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%; /* Aumentado para ser más visible */
-            max-width: 800px; /* Aumentado el ancho máximo */
-            z-index: 9999;
+            position: fixed !important;
+            top: 78% !important;
+            bottom: auto !important;
+            left: 50% !important;
+            right: auto !important;
+            transform: translate(-50%, -50%) !important;
+            width: 70% !important;
+            max-width: 800px !important;
+            z-index: 9999 !important;
             padding: 0 !important;
+            margin: 0 !important;
             animation: floatIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
         
         /* Ajuste móvil para el input inicial */
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 768px) {
             [data-testid="stChatInput"] {
-                top: 82% !important; /* Bajar más el input en móvil para dar espacio al mensaje */
+                top: 75% !important;
+                bottom: auto !important;
                 width: 90% !important;
+                max-width: 90% !important;
+                transform: translate(-50%, -50%) !important;
             }
         }
         
         [data-testid="stChatInput"] > div {
             background-color: #FFFFFF !important;
             border: 2px solid rgb(3, 110, 58) !important;
-            border-radius: 15px !important; /* Más cuadrado con esquinas suavizadas */
-            padding: 2px 10px !important; /* Reducido para hacerla más delgada */
+            border-radius: 15px !important;
+            padding: 2px 10px !important;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
             display: flex !important;
-            align-items: center !important; /* Centrado vertical crítico */
+            align-items: center !important;
             justify-content: center !important;
         }
         /* Asegurar que no haya fondos oscuros internos */
@@ -743,7 +749,7 @@ if len(st.session_state.messages) == 0:
             min-height: auto !important;
             height: auto !important;
             line-height: 1.2 !important;
-            align-self: center !important; /* Asegurar que el textarea se centre */
+            align-self: center !important;
         }
         /* Centrar explícitamente el botón de enviar */
         [data-testid="stChatInputSubmitButton"] {
@@ -761,39 +767,26 @@ else:
     # ESTADO CHAT ACTIVO: ABAJO (STANDARD)
     st.markdown("""
     <style>
-        /* Animación de deslizamiento hacia abajo */
-        @keyframes slideDown {
-            0% {
-                opacity: 0.8;
-                transform: translateY(-100px) scale(1.05);
-            }
-            50% {
-                transform: translateY(10px) scale(0.98);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
         [data-testid="stChatInput"] {
-            position: fixed;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            margin-left: auto;
-            margin-right: auto;
-            width: 90%;
-            max-width: 700px;
-            z-index: 9999;
+            position: fixed !important;
+            top: auto !important;
+            bottom: 20px !important;
+            left: 50% !important;
+            right: auto !important;
+            transform: translateX(-50%) !important;
+            width: 90% !important;
+            max-width: 700px !important;
+            z-index: 9999 !important;
             padding: 0 !important;
-            animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            margin: 0 !important;
         }
         
-        /* En móvil, subir el input para no solapar los botones */
+        /* En móvil, subir el input para no solapar los botones de acción */
         @media only screen and (max-width: 768px) {
             [data-testid="stChatInput"] {
-                bottom: 100px !important;
+                bottom: 80px !important;
+                width: 92% !important;
+                max-width: 92% !important;
             }
         }
         [data-testid="stChatInput"] > div {
@@ -812,20 +805,6 @@ else:
         }
         [data-testid="stChatInput"] textarea {
             font-size: 1.1rem !important;
-        }
-        
-        /* Ajuste móvil para el input en modo chat activo */
-        @media only screen and (max-width: 600px) {
-            [data-testid="stChatInput"] {
-                bottom: 100px !important; /* Subido para no solaparse con botones de micrófono/enviar */
-                width: 92% !important;
-                max-width: 100% !important;
-                left: 50% !important;
-                right: auto !important;
-                transform: translateX(-50%) !important;
-                margin: 0 !important;
-                transition: bottom 0.3s ease !important;
-            }
         }
     </style>
     """, unsafe_allow_html=True)
@@ -997,24 +976,25 @@ if prompt:
     st.markdown("""
     <style>
         [data-testid="stChatInput"] {
-            position: fixed;
-            bottom: 10px;
-            top: auto !important; /* Anular top */
-            left: 0;
-            right: 0;
-            margin-left: auto;
-            margin-right: auto;
-            width: 90%;
-            max-width: 700px;
-            z-index: 9999;
+            position: fixed !important;
+            top: auto !important;
+            bottom: 20px !important;
+            left: 50% !important;
+            right: auto !important;
+            transform: translateX(-50%) !important;
+            width: 90% !important;
+            max-width: 700px !important;
+            z-index: 9999 !important;
             padding: 0 !important;
-            transform: none !important; /* Quitar centrado */
+            margin: 0 !important;
         }
         
         /* En móvil, subir el input para no solapar botones */
         @media only screen and (max-width: 768px) {
             [data-testid="stChatInput"] {
-                bottom: 100px !important;
+                bottom: 80px !important;
+                width: 92% !important;
+                max-width: 92% !important;
             }
         }
         
@@ -1034,19 +1014,6 @@ if prompt:
         }
         [data-testid="stChatInput"] textarea {
             font-size: 1.1rem !important;
-        }
-        
-        /* Ajuste móvil después de enviar mensaje */
-        @media only screen and (max-width: 600px) {
-            [data-testid="stChatInput"] {
-                bottom: 15px !important;
-                width: 92% !important;
-                max-width: 100% !important;
-                left: 50% !important;
-                right: auto !important;
-                transform: translateX(-50%) !important;
-                margin: 0 !important;
-            }
         }
     </style>
     """, unsafe_allow_html=True)
@@ -1288,17 +1255,6 @@ components.html("""
             #allison-action-buttons {
                 display: flex !important;
             }
-            
-            /* Ajustar posición del input para dejar espacio a los botones */
-            [data-testid="stChatInput"] {
-                bottom: 100px !important;
-                transition: bottom 0.3s ease !important;
-            }
-            
-            /* Cuando el teclado está abierto, subir el input */
-            [data-testid="stChatInput"].keyboard-open {
-                bottom: 50% !important;
-            }
         }
     `;
     window.parent.document.head.appendChild(style);
@@ -1411,33 +1367,27 @@ components.html("""
     window.parent.document.body.appendChild(container);
     
     // --- DETECTAR TECLADO VIRTUAL EN MÓVIL ---
-    // Detectar cuando el textarea recibe foco (teclado se abre)
+    // Solo ocultar/mostrar los botones de acción, NO mover el input
     function setupKeyboardDetection() {
-        var chatInput = window.parent.document.querySelector('[data-testid="stChatInput"]');
         var textarea = window.parent.document.querySelector('[data-testid="stChatInput"] textarea');
         var actionButtons = window.parent.document.getElementById('allison-action-buttons');
         
-        if (textarea && chatInput) {
+        if (textarea && !textarea.hasAttribute('data-keyboard-listener')) {
+            textarea.setAttribute('data-keyboard-listener', 'true');
+            
             // Cuando el textarea recibe foco (teclado se abre)
             textarea.addEventListener('focus', function() {
-                if (window.innerWidth <= 768) {
-                    chatInput.style.bottom = '45%';
-                    chatInput.style.transition = 'bottom 0.3s ease';
-                    if (actionButtons) {
-                        actionButtons.style.display = 'none';
-                    }
+                if (window.innerWidth <= 768 && actionButtons) {
+                    actionButtons.style.display = 'none';
                 }
             });
             
             // Cuando el textarea pierde foco (teclado se cierra)
             textarea.addEventListener('blur', function() {
-                if (window.innerWidth <= 768) {
+                if (window.innerWidth <= 768 && actionButtons) {
                     setTimeout(function() {
-                        chatInput.style.bottom = '85px';
-                        if (actionButtons) {
-                            actionButtons.style.display = 'flex';
-                        }
-                    }, 100);
+                        actionButtons.style.display = 'flex';
+                    }, 150);
                 }
             });
         }
