@@ -1279,8 +1279,25 @@ components.html("""
     var recognition = null;
     var isListening = false;
     
+    // Función para encontrar el textarea actual (Streamlit lo recrea)
+    function getTextarea() {
+        return window.parent.document.querySelector('[data-testid="stChatInputTextArea"]') ||
+               window.parent.document.querySelector('textarea[placeholder]') ||
+               window.parent.document.querySelector('textarea');
+    }
+    
+    // Función para encontrar el botón de enviar de Streamlit
+    function getSubmitButton() {
+        return window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]') ||
+               window.parent.document.querySelector('button[kind="primaryFormSubmit"]') ||
+               window.parent.document.querySelector('.stChatInput button');
+    }
+    
     // Evento click del micrófono
-    micBtn.onclick = function() {
+    micBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Mic button clicked');
         if (isListening) {
             stopDictation();
         } else {
@@ -1289,18 +1306,42 @@ components.html("""
     };
     
     // Evento click del botón enviar
-    sendBtn.onclick = function() {
-        // Cerrar el teclado
-        closeKeyboard();
+    sendBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Send button clicked');
         
         // Buscar el botón de enviar de Streamlit y hacer click
-        var submitBtn = window.parent.document.querySelector('[data-testid="stChatInputSubmitButton"]');
-        if (submitBtn) {
-            submitBtn.click();
-        }
+        var submitBtn = getSubmitButton();
+        console.log('Submit button found:', submitBtn);
         
-        // Asegurar que el foco se quite después del click
-        setTimeout(closeKeyboard, 100);
+        if (submitBtn) {
+            // Simular click de forma más robusta
+            submitBtn.click();
+            
+            // También intentar con dispatchEvent
+            setTimeout(function() {
+                var clickEvent = new MouseEvent('click', {
+                    view: window.parent,
+                    bubbles: true,
+                    cancelable: true
+                });
+                submitBtn.dispatchEvent(clickEvent);
+            }, 50);
+        } else {
+            // Si no encuentra el botón, intentar enviar por Enter
+            var textarea = getTextarea();
+            if (textarea && textarea.value.trim()) {
+                var enterEvent = new KeyboardEvent('keydown', {
+                    key: 'Enter',
+                    code: 'Enter',
+                    keyCode: 13,
+                    which: 13,
+                    bubbles: true
+                });
+                textarea.dispatchEvent(enterEvent);
+            }
+        }
     };
     
     function startDictation() {
@@ -1313,20 +1354,24 @@ components.html("""
             
             recognition.onstart = function() {
                 isListening = true;
-                micBtn.classList.add('listening');
+                var mic = window.parent.document.getElementById('mic-btn-allison');
+                if (mic) mic.classList.add('listening');
+                console.log('Listening started');
             };
             
             recognition.onerror = function(e) {
-                console.error(e);
+                console.error('Speech recognition error:', e);
                 stopDictation();
             };
             
             recognition.onend = function() {
+                console.log('Listening ended');
                 stopDictation();
             };
             
             recognition.onresult = function(e) {
                 var transcript = e.results[0][0].transcript;
+                console.log('Transcript:', transcript);
                 insertText(transcript);
                 stopDictation();
             };
@@ -1339,23 +1384,23 @@ components.html("""
     
     function stopDictation() {
         isListening = false;
-        micBtn.classList.remove('listening');
+        var mic = window.parent.document.getElementById('mic-btn-allison');
+        if (mic) mic.classList.remove('listening');
         if (recognition) {
             try { recognition.stop(); } catch(e) {}
         }
     }
     
     function insertText(text) {
-        var textareas = window.parent.document.querySelectorAll('textarea');
-        for (var i = 0; i < textareas.length; i++) {
-            var ta = textareas[i];
-            if (ta.placeholder === '' || ta.getAttribute('data-testid') === 'stChatInputTextArea') {
-                var nativeSetter = Object.getOwnPropertyDescriptor(window.parent.HTMLTextAreaElement.prototype, "value").set;
-                nativeSetter.call(ta, text);
-                ta.dispatchEvent(new Event('input', { bubbles: true }));
-                ta.focus();
-                break;
-            }
+        var ta = getTextarea();
+        if (ta) {
+            console.log('Found textarea, inserting text');
+            var nativeSetter = Object.getOwnPropertyDescriptor(window.parent.HTMLTextAreaElement.prototype, "value").set;
+            nativeSetter.call(ta, text);
+            ta.dispatchEvent(new Event('input', { bubbles: true }));
+            ta.focus();
+        } else {
+            console.log('No textarea found');
         }
     }
     
@@ -1366,41 +1411,22 @@ components.html("""
     // Agregar contenedor al body del padre
     window.parent.document.body.appendChild(container);
     
-    // --- DETECTAR TECLADO VIRTUAL EN MÓVIL ---
-    // Solo ocultar/mostrar los botones de acción, NO mover el input
-    function setupKeyboardDetection() {
-        var textarea = window.parent.document.querySelector('[data-testid="stChatInput"] textarea');
+    // Asegurar que los botones siempre estén visibles en móvil
+    function ensureButtonsVisible() {
         var actionButtons = window.parent.document.getElementById('allison-action-buttons');
-        
-        if (textarea && !textarea.hasAttribute('data-keyboard-listener')) {
-            textarea.setAttribute('data-keyboard-listener', 'true');
-            
-            // Cuando el textarea recibe foco (teclado se abre)
-            textarea.addEventListener('focus', function() {
-                if (window.innerWidth <= 768 && actionButtons) {
-                    actionButtons.style.display = 'none';
-                }
-            });
-            
-            // Cuando el textarea pierde foco (teclado se cierra)
-            textarea.addEventListener('blur', function() {
-                if (window.innerWidth <= 768 && actionButtons) {
-                    setTimeout(function() {
-                        actionButtons.style.display = 'flex';
-                    }, 150);
-                }
-            });
+        if (actionButtons && window.innerWidth <= 768) {
+            actionButtons.style.display = 'flex';
         }
     }
     
-    // Ejecutar después de que Streamlit cargue completamente
-    setTimeout(setupKeyboardDetection, 1000);
-    
-    // Re-ejecutar si cambia el DOM (Streamlit puede recrear elementos)
-    var keyboardObserver = new MutationObserver(function() {
-        setupKeyboardDetection();
+    // Re-asegurar visibilidad después de cada actualización de Streamlit
+    var visibilityObserver = new MutationObserver(function() {
+        setTimeout(ensureButtonsVisible, 100);
     });
-    keyboardObserver.observe(window.parent.document.body, { childList: true, subtree: true });
+    visibilityObserver.observe(window.parent.document.body, { childList: true, subtree: true });
+    
+    // También verificar periódicamente
+    setInterval(ensureButtonsVisible, 2000);
 })();
 </script>
 """, height=0, width=0)
