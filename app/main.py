@@ -58,6 +58,16 @@ else:
 # --- Ocultar footer y badges/avatares de Streamlit/GitHub (global y móvil) ---
 hide_streamlit_footer = """
 <style>
+/* ===== SELECTORES ESPECÍFICOS QUE FUNCIONARON A OTROS USUARIOS ===== */
+.css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+.styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+.viewerBadge_text__1JaDK, .css-14xtw13, .e8zbici0,
+.css-1dp5vir, .e1ewe7hr1, .css-1adrfps,
+.css-z5fcl4, .e1ewe7hr0 {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 /* ===== OCULTAR ELEMENTOS GLOBALMENTE ===== */
 #MainMenu {visibility: hidden !important; display: none !important;}
 #GithubIcon {visibility: hidden !important; display: none !important;}
@@ -165,9 +175,24 @@ components.html("""
     function removeStreamlitBranding() {
         // Selectores de elementos a eliminar
         var selectorsToRemove = [
+            // Clases específicas que funcionaron a otros usuarios
+            '.css-1jc7ptx',
+            '.e1ewe7hr3',
+            '.viewerBadge_container__1QSob',
+            '.styles_viewerBadge__1yB5_',
+            '.viewerBadge_link__1S137',
+            '.viewerBadge_text__1JaDK',
+            '.css-14xtw13',
+            '.e8zbici0',
+            '.css-1dp5vir',
+            '.e1ewe7hr1',
+            '.css-1adrfps',
+            '.css-z5fcl4',
+            '.e1ewe7hr0',
             // Badges de Streamlit
             '[class*="viewerBadge"]',
             '[class*="StatusWidget"]',
+            '[class*="stDeployButton"]',
             'a[href*="streamlit.io"]',
             // Avatar de GitHub
             'img[src*="avatars"]',
