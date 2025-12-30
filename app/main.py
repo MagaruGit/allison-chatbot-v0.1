@@ -606,7 +606,7 @@ if len(st.session_state.messages) == 0:
         <style>
             #welcome-message {
                 position: fixed;
-                top: 55%;
+                top: 68%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 80%;
