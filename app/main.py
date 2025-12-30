@@ -602,16 +602,17 @@ if len(st.session_state.messages) == 0:
     
     with welcome_placeholder.container():
         # CSS para el contenedor del mensaje de bienvenida
+        # Posicionado justo arriba del input, no con position fixed absoluto
         st.markdown("""
         <style>
             #welcome-message {
                 position: fixed;
-                top: 68%;
+                bottom: 28%;
                 left: 50%;
-                transform: translate(-50%, -50%);
+                transform: translateX(-50%);
                 width: 80%;
                 text-align: center;
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 color: rgb(48, 47, 49);
                 font-weight: bold;
                 z-index: 9998;
@@ -622,11 +623,11 @@ if len(st.session_state.messages) == 0:
                 display: inline-block;
             }
             
-            /* Ajuste para móviles: Posicionar entre el subtítulo y el input */
+            /* Ajuste para móviles */
             @media only screen and (max-width: 600px) {
                 #welcome-message {
-                    top: 68% !important; /* Más abajo para no solapar con título */
-                    font-size: 1rem !important; /* Reducir un poco la fuente */
+                    bottom: 25% !important;
+                    font-size: 1rem !important;
                     width: 90% !important;
                 }
             }
