@@ -55,48 +55,87 @@ else:
         </style>
     """, unsafe_allow_html=True)
 
-# --- Ocultar footer y badges/avatares de Streamlit/GitHub (global) ---
+# --- Ocultar footer y badges/avatares de Streamlit/GitHub (global y móvil) ---
 hide_streamlit_footer = """
 <style>
-/* Ocultar menú hamburguesa y footer */
+/* ===== OCULTAR ELEMENTOS GLOBALMENTE ===== */
 #MainMenu {visibility: hidden !important; display: none !important;}
+#GithubIcon {visibility: hidden !important; display: none !important;}
 footer {visibility: hidden !important; display: none !important; height: 0 !important;}
 
-/* Ocultar TODOS los elementos de Streamlit Cloud */
-/* Badge "Hosted with Streamlit" */
+/* Ocultar links a GitHub */
+a[href*="github"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* ===== OCULTAR HEADER COMPLETO EN MÓVIL ===== */
+@media (max-width: 768px) {
+    header {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+    }
+
+    [data-testid="stHeader"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+    }
+
+    [data-testid="stToolbar"] {
+        display: none !important;
+    }
+
+    [data-testid="stDecoration"] {
+        display: none !important;
+    }
+
+    [data-testid="stStatusWidget"] {
+        display: none !important;
+    }
+    
+    /* Ocultar cualquier imagen de avatar */
+    img[src*="avatars"],
+    img[src*="github"],
+    img[alt*="avatar"],
+    img[alt*="Avatar"] {
+        display: none !important;
+    }
+    
+    /* Ocultar badges y elementos flotantes */
+    .viewerBadge_container__r5I1v,
+    .viewerBadge_link__qRIco,
+    .styles_viewerBadge__CvC9N,
+    div[class*="viewerBadge"],
+    div[class*="StatusWidget"] {
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
+
+/* ===== OCULTAR TODOS LOS ELEMENTOS DE STREAMLIT CLOUD ===== */
 .viewerBadge_container__r5I1v,
 .viewerBadge_link__qRIco,
 .styles_viewerBadge__CvC9N,
 div[class*="viewerBadge"],
 a[href*="streamlit.io/cloud"],
 a[href*="streamlit.io"][target="_blank"],
-
-/* Botones de deploy/manage */
 [data-testid="stDecoration"],
 [data-testid="stStatusWidget"],
 [data-testid="manage-app-button"],
 [data-testid="stToolbar"],
 .stDeployButton,
 button[kind="header"],
-
-/* Avatar de GitHub / perfil */
 img[src*="avatars.githubusercontent.com"],
 img[src*="github"],
-a[href*="github.com"],
 div[class*="StatusWidget"],
-
-/* Elementos en el header de Streamlit Cloud */
 header[data-testid="stHeader"] button,
 header[data-testid="stHeader"] a[target="_blank"],
-header[data-testid="stHeader"] img[alt*="avatar"],
-header[data-testid="stHeader"] img[alt*="Avatar"],
-
-/* Toolbar y decoraciones */
-[data-testid="stToolbar"],
-[data-testid="stDecoration"],
+header[data-testid="stHeader"] img,
 .stToolbar,
-
-/* Cualquier elemento fijo en esquinas (típico de badges) */
 div[style*="position: fixed"][style*="bottom"][style*="right"],
 div[style*="position: fixed"][style*="top"][style*="right"] img {
     display: none !important;
