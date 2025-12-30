@@ -778,7 +778,7 @@ else:
         
         [data-testid="stChatInput"] {
             position: fixed;
-            bottom: 10px;
+            bottom: 5px;
             left: 0;
             right: 0;
             margin-left: auto;
@@ -793,7 +793,7 @@ else:
         /* En móvil, subir el input para no solapar los botones */
         @media only screen and (max-width: 768px) {
             [data-testid="stChatInput"] {
-                bottom: 85px !important;
+                bottom: 100px !important;
             }
         }
         [data-testid="stChatInput"] > div {
@@ -817,7 +817,7 @@ else:
         /* Ajuste móvil para el input en modo chat activo */
         @media only screen and (max-width: 600px) {
             [data-testid="stChatInput"] {
-                bottom: 85px !important; /* Subido para no solaparse con botones de micrófono/enviar */
+                bottom: 100px !important; /* Subido para no solaparse con botones de micrófono/enviar */
                 width: 92% !important;
                 max-width: 100% !important;
                 left: 50% !important;
@@ -967,7 +967,7 @@ for message in st.session_state.messages:
                             border-radius: 15px; 
                             border: 1px solid #e0e0e0; 
                             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                            margin-bottom: 10px;'>
+                            margin-bottom: 5px;'>
                     {message["content"]}
                 </div>
             """, unsafe_allow_html=True)
@@ -981,7 +981,7 @@ for message in st.session_state.messages:
                             border-radius: 15px; 
                             border: 1px solid rgb(3, 110, 58);
                             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-                            margin-bottom: 10px;'>
+                            margin-bottom: 5px;'>
                     {message["content"]}
                 </div>
             """, unsafe_allow_html=True)
@@ -998,7 +998,7 @@ if prompt:
     <style>
         [data-testid="stChatInput"] {
             position: fixed;
-            bottom: 10px;
+            bottom: 5px;
             top: auto !important; /* Anular top */
             left: 0;
             right: 0;
@@ -1010,6 +1010,14 @@ if prompt:
             padding: 0 !important;
             transform: none !important; /* Quitar centrado */
         }
+        
+        /* En móvil, subir el input para no solapar botones */
+        @media only screen and (max-width: 768px) {
+            [data-testid="stChatInput"] {
+                bottom: 100px !important;
+            }
+        }
+        
         [data-testid="stChatInput"] > div {
             background-color: #FFFFFF !important;
             border: 2px solid rgb(3, 110, 58) !important;
@@ -1228,7 +1236,7 @@ components.html("""
     style.textContent = `
         #allison-action-buttons {
             position: fixed;
-            bottom: 10px;
+            bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
             display: none;
@@ -1283,7 +1291,7 @@ components.html("""
             
             /* Ajustar posición del input para dejar espacio a los botones */
             [data-testid="stChatInput"] {
-                bottom: 85px !important;
+                bottom: 100px !important;
                 transition: bottom 0.3s ease !important;
             }
             
