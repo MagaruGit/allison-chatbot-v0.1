@@ -55,6 +55,31 @@ else:
         </style>
     """, unsafe_allow_html=True)
 
+# --- Ocultar footer y badges/avatares de Streamlit/GitHub (global) ---
+# Prueba directa del snippet compartido y ampliación para otros elementos de Streamlit Cloud
+hide_streamlit_footer = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden; display: none !important;}
+
+/* Ocultar badge "Hosted with Streamlit" y botones/avatares del header */
+.viewerBadge_container__r5I1v,
+.viewerBadge_link__qRIco,
+.styles_viewerBadge__CvC9N,
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"],
+[data-testid="manage-app-button"],
+.stDeployButton,
+button[kind="header"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+</style>
+"""
+st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
+
 # --- BOTONES EN EL HEADER (Visualización) ---
 st.markdown("""
     <style>
