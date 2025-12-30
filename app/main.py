@@ -528,14 +528,16 @@ st.markdown("""
                 margin-top: -5px !important;
             }
             
-            /* Textos de bienvenida */
+            /* Textos de bienvenida - en una sola línea */
             #typewriter-1 {
-                font-size: 1rem !important;
+                font-size: 0.75rem !important;
                 line-height: 1.3 !important;
-                min-height: 3em !important; /* Espacio para 2 líneas */
+                min-height: 1.5em !important;
+                white-space: nowrap !important;
             }
             #typewriter-2 {
-                font-size: 0.9rem !important;
+                font-size: 0.7rem !important;
+                white-space: nowrap !important;
             }
             
             /* Input de chat en móvil - Solo ajustar ancho, la posición la maneja cada estado */
@@ -626,9 +628,10 @@ if len(st.session_state.messages) == 0:
             /* Ajuste para móviles */
             @media only screen and (max-width: 600px) {
                 #welcome-message {
-                    bottom: 25% !important;
-                    font-size: 1rem !important;
-                    width: 90% !important;
+                    bottom: 38% !important;
+                    font-size: 0.85rem !important;
+                    width: 95% !important;
+                    white-space: nowrap !important;
                 }
             }
         </style>
