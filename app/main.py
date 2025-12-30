@@ -778,7 +778,7 @@ else:
         
         [data-testid="stChatInput"] {
             position: fixed;
-            bottom: 5px;
+            bottom: 10px;
             left: 0;
             right: 0;
             margin-left: auto;
@@ -917,7 +917,7 @@ else:
     
     st.markdown(f"""
     <div style='text-align: center; color: rgb(48, 47, 49); margin-top: 0px;'>
-        <b style='font-size: 1.2em; display: block; margin-bottom: 5px;'>Asistente Virtual de la Secretaría de Infraestructura Física</b>
+        <b style='font-size: 1.2em; display: block; margin-bottom: 10px;'>Asistente Virtual de la Secretaría de Infraestructura Física</b>
         <i style='font-size: 1.1em;'>{gob_html}</i><br><br>
     </div>
     """, unsafe_allow_html=True)
@@ -967,7 +967,7 @@ for message in st.session_state.messages:
                             border-radius: 15px; 
                             border: 1px solid #e0e0e0; 
                             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                            margin-bottom: 5px;'>
+                            margin-bottom: 10px;'>
                     {message["content"]}
                 </div>
             """, unsafe_allow_html=True)
@@ -981,7 +981,7 @@ for message in st.session_state.messages:
                             border-radius: 15px; 
                             border: 1px solid rgb(3, 110, 58);
                             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-                            margin-bottom: 5px;'>
+                            margin-bottom: 10px;'>
                     {message["content"]}
                 </div>
             """, unsafe_allow_html=True)
@@ -998,7 +998,7 @@ if prompt:
     <style>
         [data-testid="stChatInput"] {
             position: fixed;
-            bottom: 5px;
+            bottom: 10px;
             top: auto !important; /* Anular top */
             left: 0;
             right: 0;
@@ -1236,7 +1236,7 @@ components.html("""
     style.textContent = `
         #allison-action-buttons {
             position: fixed;
-            bottom: 5px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             display: none;
