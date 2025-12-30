@@ -13,8 +13,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el resto del código
 COPY . .
 
-# Crear directorio .streamlit y archivo secrets.toml vacío para evitar error
-RUN mkdir -p /app/.streamlit && echo "" > /app/.streamlit/secrets.toml
+# Crear directorio .streamlit y archivo de configuración
+RUN mkdir -p /app/.streamlit && \
+    echo '[general]' > /app/.streamlit/secrets.toml && \
+    echo 'OPENAI_API_KEY = ""' >> /app/.streamlit/secrets.toml
 
 # Exponer el puerto (Render usa la variable de entorno PORT)
 EXPOSE 8501

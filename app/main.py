@@ -3,7 +3,16 @@ import streamlit.components.v1 as components
 import os
 import time
 import random
-from rag import get_qa_chain, create_vector_db, buscar_capa_gis, buscar_datos_vias
+
+# Debug: Verificar inicio de la aplicación
+print("🚀 Iniciando aplicación Allison...")
+
+try:
+    from rag import get_qa_chain, create_vector_db, buscar_capa_gis, buscar_datos_vias
+    print("✅ Módulo rag importado correctamente")
+except Exception as e:
+    print(f"❌ Error importando rag: {e}")
+    st.error(f"Error al cargar módulos: {e}")
 
 
 # Inicializar historial de chat al principio para controlar la UI
