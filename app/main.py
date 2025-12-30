@@ -789,6 +789,13 @@ else:
             padding: 0 !important;
             animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
+        
+        /* En móvil, subir el input para no solapar los botones */
+        @media only screen and (max-width: 768px) {
+            [data-testid="stChatInput"] {
+                bottom: 85px !important;
+            }
+        }
         [data-testid="stChatInput"] > div {
             background-color: #FFFFFF !important;
             border: 2px solid rgb(3, 110, 58) !important;
