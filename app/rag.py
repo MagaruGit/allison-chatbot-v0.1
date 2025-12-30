@@ -17,13 +17,13 @@ from langchain_core.prompts import PromptTemplate
 DATA_PATH = "data"
 DB_PATH = "chroma_db"
 
-# Configurar API Key de OpenAI
-if "OPENAI_API_KEY" in st.secrets:
-    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+# Configurar API Key de OpenAI desde variable de entorno
+# En Docker/Render, configurar con variables de entorno (no usar st.secrets)
+api_key = os.environ.get("OPENAI_API_KEY")
+if not api_key:
+    print("⚠️ ADVERTENCIA: OPENAI_API_KEY no está configurada como variable de entorno.")
 else:
-    # Fallback for local development if not using secrets.toml, but better to warn
-    # os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
-    pass
+    os.environ["OPENAI_API_KEY"] = api_key  # Asegurar que esté disponible
 
 def buscar_datos_vias(consulta):
     """

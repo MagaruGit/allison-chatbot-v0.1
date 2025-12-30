@@ -3,12 +3,18 @@ FROM python:3.9-slim
 # Establecer directorio de trabajo
 WORKDIR /app
 
+# NOTA: La API Key de OpenAI se configura en Render como variable de entorno
+# NO incluir secrets en el Dockerfile
+
 # Copiar archivos de requisitos e instalar dependencias
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el resto del código
 COPY . .
+
+# Crear directorio .streamlit y archivo secrets.toml vacío para evitar error
+RUN mkdir -p /app/.streamlit && echo "" > /app/.streamlit/secrets.toml
 
 # Exponer el puerto (Render usa la variable de entorno PORT)
 EXPOSE 8501
