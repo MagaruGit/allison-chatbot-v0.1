@@ -1,6 +1,7 @@
-venv/
+﻿venv/
 __pycache__/
 *.pyc
 versiones_zip/
 .env
-.DS_Store.streamlit/secrets.toml
+.DS_Store
+.streamlit/
