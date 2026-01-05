@@ -268,25 +268,10 @@ st.markdown("""
             font-family: 'Expressway', 'Overpass', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
-        /* ANIMACIÓN SHINE PARA EL FONDO */
-        @keyframes shine-background {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        /* Fondo con efecto shine blanco aplicado al contenedor principal */
-        .stApp, [data-testid="stAppViewContainer"] {
-            background: linear-gradient(
-                110deg,
-                #F0F2F6 0%,
-                #F0F2F6 40%,
-                #FFFFFF 50%,
-                #F0F2F6 60%,
-                #F0F2F6 100%
-            ) !important;
-            background-size: 200% 100% !important;
-            animation: shine-background 8s linear infinite !important;
-            background-attachment: fixed !important;
+        /* Fondo con gradiente sutil para dar profundidad */
+        .stApp {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%);
+            color: rgb(48, 47, 49);
         }
         
         /* CONTENEDOR PRINCIPAL MÁS ANCHO */
