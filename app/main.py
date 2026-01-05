@@ -275,20 +275,22 @@ st.markdown("""
             100% { background-position: 200% 0; }
         }
 
-        /* Fondo con efecto shine blanco */
+        /* Fondo con efecto shine blanco más visible */
         .stApp {
             background: linear-gradient(
                 110deg,
-                #F5F5F5 0%,
-                #F5F5F5 35%,
+                #E8E8E8 0%,
+                #E8E8E8 30%,
+                #F0F0F0 38%,
                 #FFFFFF 45%,
                 #FFFFFF 50%,
                 #FFFFFF 55%,
-                #F5F5F5 65%,
-                #F5F5F5 100%
-            );
-            background-size: 200% 100%;
-            animation: shine-background 15s linear infinite;
+                #F0F0F0 62%,
+                #E8E8E8 70%,
+                #E8E8E8 100%
+            ) !important;
+            background-size: 200% 100% !important;
+            animation: shine-background 12s linear infinite !important;
             color: rgb(48, 47, 49);
         }
         
